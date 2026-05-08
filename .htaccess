@@ -1,0 +1,178 @@
+# ============================================
+# CONFIGURAÇÃO MVC - URL REWRITING
+# ============================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    # ============================================
+    # FORÇAR HTTPS (DESCOMENTE APÓS CONFIGURAR SSL)
+    # ============================================
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirecionar sitemap.xml para o gerador dinâmico (regra independente)
+    RewriteRule ^sitemap\.xml$ public/sitemap.php [L]
+
+    # ============================================
+    # PERMITIR ACESSO A ARQUIVOS PÚBLICOS
+    # ============================================
+    # Permite acesso direto a arquivos CSS, JS, imagens, etc
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/public/
+    # NÃO rotear o painel admin pelo MVC
+    RewriteCond %{REQUEST_URI} !^/admin/
+    
+    # ============================================
+    # ROTEAR TUDO PARA INDEX.PHP
+    # ============================================
+    # Todas as requisições que não sejam arquivos/diretórios vão para index.php
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+# ============================================
+# COMPRESSÃO GZIP
+# ============================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/truetype
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+</IfModule>
+
+# ============================================
+# CACHE DO NAVEGADOR
+# ============================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML e dados
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType application/json "access plus 0 seconds"
+    
+    # Imagens
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # CSS e JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    
+    # Fontes
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ============================================
+# SEGURANÇA
+# ============================================
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Seguir links simbólicos
+Options +FollowSymLinks
+
+# Proteger arquivos de configuração
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger arquivos sensíveis
+<FilesMatch "\.(ini|log|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger diretórios sensíveis
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Bloquear acesso direto a /app, /core, /config
+    RewriteRule ^(app|core|config|logs)/ - [F,L]
+</IfModule>
+
+# Headers de segurança
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevenir MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # XSS Protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions Policy
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+    # Remover informações do servidor
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# ============================================
+# LIMITE DE UPLOAD (PHP)
+# ============================================
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 5M
+    php_value post_max_size 5M
+    php_value max_execution_time 30
+    php_value max_input_time 30
+</IfModule>
+
+# ============================================
+# OTIMIZAÇÃO UTF-8
+# ============================================
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+    AddCharset UTF-8 .html .css .js .xml .json .rss .atom .php
+</IfModule>
+
+# ============================================
+# TIPOS MIME
+# ============================================
+<IfModule mod_mime.c>
+    # Fontes
+    AddType font/ttf .ttf
+    AddType font/otf .otf
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
+    AddType application/vnd.ms-fontobject .eot
+    
+    # Outros
+    AddType image/svg+xml .svg .svgz
+    AddType application/json .json
+    AddType application/javascript .js
+    AddType text/css .css
+</IfModule>
+
+# ============================================
+# PÁGINAS DE ERRO PERSONALIZADAS (OPCIONAL)
+# ============================================
+# ErrorDocument 404 /mvc-portfolio/index.php
+# ErrorDocument 403 /mvc-portfolio/index.php
+# ErrorDocument 500 /mvc-portfolio/index.php

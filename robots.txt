@@ -1,0 +1,16 @@
+# ============================================
+# ROBOTS.TXT - Portfolio Vinicius H.
+# ============================================
+
+User-agent: *
+Allow: /
+
+# Bloquear acesso ao painel administrativo e core
+Disallow: /admin/
+Disallow: /app/
+Disallow: /config/
+Disallow: /core/
+Disallow: /vendor/
+
+# Sitemap
+Sitemap: https://viniciush.vnicidigital.com.br/sitemap.xml

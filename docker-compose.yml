@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: vinicius-portfolio
+    ports:
+      - "8080:80"
+    volumes:
+      # Mapeia a pasta atual para dentro do container
+      # Isso permite que você edite arquivos localmente e veja as mudanças na hora
+      - ./:/var/www/html

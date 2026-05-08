@@ -1,0 +1,46 @@
+# ============================================
+# GITIGNORE - Portfolio Vinicius H.
+# ============================================
+
+# CONFIGURAÇÕES SENSÍVEIS
+.env
+.env.local
+.env.*.local
+
+# BANCO DE DADOS (SQLite)
+# Ignorar o arquivo de banco de dados real para não sobrescrever dados entre ambientes
+/app/data/*.sqlite
+/app/data/*.sqlite-journal
+
+# ARQUIVOS DE DADOS (JSON)
+# Se você quiser manter os arquivos JSON como backup no Git, comente a linha abaixo.
+# Se preferir que o banco de dados seja a única fonte da verdade, mantenha ignorado.
+/app/data/*.json
+
+# UPLOADS E MÍDIA
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# LOGS E CACHE
+logs/
+*.log
+error_log
+cache/
+temp/
+tmp/
+
+# DEPENDÊNCIAS
+/vendor/
+/node_modules/
+
+# IDE / EDITOR / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# BACKUP
+*.bak
+*.backup
+*.old
+*.orig
