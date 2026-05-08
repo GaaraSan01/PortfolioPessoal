@@ -1,7 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // ---- Tab: Escrever / Preview ----
     const tabBtns = document.querySelectorAll('.tab-btn');
     const writePanes = document.querySelectorAll('.write-pane');
     const previewPanes = document.querySelectorAll('.preview-pane');
@@ -47,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ---- Auto-dismiss alerts ----
+    
     const alerts = document.querySelectorAll('.admin-alert.success');
     alerts.forEach(alert => {
         setTimeout(() => {
@@ -57,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     });
 
-    // ---- Confirmar exclusão ----
+    
     document.querySelectorAll('form[data-confirm]').forEach(form => {
         form.addEventListener('submit', (e) => {
             if (!confirm(form.dataset.confirm)) {

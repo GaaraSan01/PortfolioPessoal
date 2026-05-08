@@ -13,14 +13,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = trim($_POST['username'] ?? '');
     $pass = trim($_POST['password'] ?? '');
 
-    if ($user === ADMIN_USER && $pass === ADMIN_PASSWORD) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user']      = $user;
-        $_SESSION['admin_csrf']      = bin2hex(random_bytes(32));
-        header('Location: ' . BASE_URL . '/admin/dashboard.php');
-        exit;
-    } else {
-        $error = 'Usuário ou senha incorretos.';
+    try {
+        $pdo = Database::getInstance();
+        $stmt = $pdo->prepare("SELECT id, username, password_hash FROM users WHERE username = :username LIMIT 1");
+        $stmt->execute(['username' => $user]);
+        $dbUser = $stmt->fetch();
+
+        if ($dbUser && password_verify($pass, $dbUser['password_hash'])) {
+            // Rehash the password if it needs to be updated (e.g. options changed)
+            if (password_needs_rehash($dbUser['password_hash'], PASSWORD_ARGON2ID)) {
+                $newHash = password_hash($pass, PASSWORD_ARGON2ID);
+                $updateStmt = $pdo->prepare("UPDATE users SET password_hash = :hash WHERE id = :id");
+                $updateStmt->execute(['hash' => $newHash, 'id' => $dbUser['id']]);
+            }
+
+            $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_user']      = $dbUser['username'];
+            $_SESSION['admin_user_id']   = $dbUser['id'];
+            $_SESSION['admin_csrf']      = bin2hex(random_bytes(32));
+            header('Location: ' . BASE_URL . '/admin/dashboard.php');
+            exit;
+        } else {
+            $error = 'Usuário ou senha incorretos.';
+        }
+    } catch (Exception $e) {
+        $error = 'Erro de autenticação.';
+        error_log("Database Error on Login: " . $e->getMessage());
     }
 }
 ?>

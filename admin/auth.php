@@ -10,10 +10,7 @@ define('ROOT', dirname(__DIR__));
 require_once ROOT . '/config/config.php';
 require_once ROOT . '/core/Database.php';
 
-// ─── CREDENCIAIS (altere aqui ou mova para .env) ───────────────────
-define('ADMIN_USER',     getenv('ADMIN_USER')     ?: 'admin');
-define('ADMIN_PASSWORD', getenv('ADMIN_PASSWORD') ?: 'portfolio2026');
-// ───────────────────────────────────────────────────────────────────
+// Credenciais agora são validadas através do banco de dados (tabela users)
 
 function admin_auth_check() {
     if (empty($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
