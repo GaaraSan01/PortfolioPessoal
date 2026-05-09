@@ -17,23 +17,23 @@
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
                 <span>React</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" alt="Java">
                 <span>Java</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C-Sharp">
                 <span>C-Sharp</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal bash">
                 <span>Bash</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
                 <span>Linux</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
                 <span>Redis</span>
             </span>
@@ -57,7 +57,7 @@
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
                 <span>PHP</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
                 <span>Laravel</span>
             </span>
@@ -90,23 +90,23 @@
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
                 <span>React</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" alt="Java">
                 <span>Java</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C-Sharp">
                 <span>C-Sharp</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal bash">
                 <span>Bash</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
                 <span>Linux</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
                 <span>Redis</span>
             </span>
@@ -130,7 +130,7 @@
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
                 <span>PHP</span>
             </span>
-            <span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
                 <span>Laravel</span>
             </span>
