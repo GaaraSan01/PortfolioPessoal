@@ -54,6 +54,10 @@
                 <span>Python</span>
             </span>
             <span class="tech-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI">
+                <span>FastAPI</span>
+            </span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
                 <span>PHP</span>
             </span>
@@ -125,6 +129,10 @@
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
                 <span>Python</span>
+            </span>
+            <span class="tech-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI">
+                <span>FastAPI</span>
             </span>
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
