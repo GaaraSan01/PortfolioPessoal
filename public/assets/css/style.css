@@ -1931,8 +1931,13 @@ body.loaded .preloader {
         display: flex;
     }
 
-    .projects-grid {
+    .projects-grid,
+    .blog-grid {
         grid-template-columns: 1fr;
+    }
+
+    .blog-card {
+        padding: 1.5rem;
     }
 
     .contact-grid-main {
@@ -1944,7 +1949,7 @@ body.loaded .preloader {
         font-size: 3rem;
     }
 
-    .blog-item h2 {
+    .blog-card h2 {
         font-size: 1.8rem;
     }
 
