@@ -2261,6 +2261,91 @@ body.loaded .preloader {
     margin: 3rem 0;
 }
 
+/* ---- TABLE STYLING ---- */
+.post-body .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 2.5rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background: #0a0a0a;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    -webkit-overflow-scrolling: touch;
+}
+
+.post-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 400px;
+}
+
+.post-body thead {
+    background: rgba(255, 68, 0, 0.06);
+    border-bottom: 2px solid var(--accent);
+}
+
+.post-body th {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.post-body th:first-child {
+    border-left: 3px solid var(--accent);
+    border-radius: 8px 0 0 0;
+}
+
+.post-body th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+.post-body tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.25s ease;
+}
+
+.post-body tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.post-body tbody tr:last-child {
+    border-bottom: none;
+}
+
+.post-body tbody tr:hover {
+    background: rgba(255, 68, 0, 0.06);
+}
+
+.post-body td {
+    padding: 0.9rem 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    vertical-align: middle;
+    line-height: 1.6;
+    transition: color 0.25s ease;
+}
+
+.post-body td:first-child {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    border-left: 3px solid transparent;
+    transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.post-body tbody tr:hover td {
+    color: #fff;
+}
+
+.post-body tbody tr:hover td:first-child {
+    border-left-color: var(--accent);
+}
+
 .post-body img {
     border-radius: 8px;
     margin: 2rem auto;

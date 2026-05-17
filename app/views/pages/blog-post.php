@@ -54,3 +54,15 @@
         </div>
     </section>
 </article>
+
+<script>
+// Envolver tabelas em .table-wrapper para scroll horizontal e estilização
+document.querySelectorAll('.post-body table').forEach(function(table) {
+    if (!table.parentElement.classList.contains('table-wrapper')) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    }
+});
+</script>
