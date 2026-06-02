@@ -16,7 +16,7 @@
                 <input type="text" name="website" style="display: none;" tabindex="-1" autocomplete="off">
                 
                 <div class="input-group">
-                    <input type="text" id="nome" name="nome" required placeholder=" " autocomplete="name" class="hover-trigger">
+                    <input type="text" id="nome" name="nome" required placeholder=" " autocomplete="name" class="hover-trigger" maxlength="50">
                     <label for="nome">Seu Nome</label>
                     <div class="line-bg"></div>
                 </div>
@@ -28,13 +28,13 @@
                 </div>
                 
                 <div class="input-group">
-                    <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" class="hover-trigger">
+                    <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" class="hover-trigger" maxlength="255">
                     <label for="email">E-mail Corporativo</label>
                     <div class="line-bg"></div>
                 </div>
                 
                 <div class="input-group">
-                    <textarea id="msg" name="mensagem" required placeholder=" " rows="3" class="hover-trigger"></textarea>
+                    <textarea id="msg" name="mensagem" required placeholder=" " rows="3" class="hover-trigger" maxlength="1000"></textarea>
                     <label for="msg">Sobre o Projeto</label>
                     <div class="line-bg"></div>
                 </div>

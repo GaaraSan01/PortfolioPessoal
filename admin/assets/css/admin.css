@@ -754,6 +754,77 @@ button {
     color: var(--a-accent);
 }
 
+/* ---- TABLE PREVIEW ---- */
+.preview-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    border: 1px solid var(--a-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.preview-content thead {
+    background: rgba(255, 68, 0, 0.06);
+    border-bottom: 2px solid var(--a-accent);
+}
+
+.preview-content th {
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+    color: #fff;
+    font-family: var(--a-font-h);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.preview-content th:first-child {
+    border-left: 3px solid var(--a-accent);
+}
+
+.preview-content tbody tr {
+    border-bottom: 1px solid var(--a-border);
+    transition: background 0.2s ease;
+}
+
+.preview-content tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.preview-content tbody tr:last-child {
+    border-bottom: none;
+}
+
+.preview-content tbody tr:hover {
+    background: rgba(255, 68, 0, 0.05);
+}
+
+.preview-content td {
+    padding: 0.7rem 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    vertical-align: middle;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+}
+
+.preview-content td:first-child {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.preview-content tbody tr:hover td {
+    color: #fff;
+}
+
+.preview-content tbody tr:hover td:first-child {
+    border-left-color: var(--a-accent);
+}
 /* ---- EMPTY STATE ---- */
 .empty-state {
     text-align: center;

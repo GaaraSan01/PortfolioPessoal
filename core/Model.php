@@ -26,6 +26,11 @@ class Model
         return strlen(trim($text)) >= $minLength;
     }
 
+    protected function validateMaxLength($text, $maxLength)
+    {
+        return strlen(trim($text)) <= $maxLength;
+    }
+
     protected function sanitize($string)
     {
         return htmlspecialchars(trim($string), ENT_QUOTES, 'UTF-8');

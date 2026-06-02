@@ -12,6 +12,8 @@ class ContactModel extends Model
             $errors[] = 'Nome é obrigatório';
         } elseif (!$this->validateName($data['nome'])) {
             $errors[] = 'Nome inválido';
+        }elseif(!$this->validateMaxLength($data['mensagem'], 50)) {
+            $errors[] = 'Nome ultrapassa o limite máximo de 50 caracteres';
         }
 
         if (empty($data['number'])) {
@@ -30,6 +32,8 @@ class ContactModel extends Model
             $errors[] = 'Mensagem é obrigatória';
         } elseif (!$this->validateMinLength($data['mensagem'], 10)) {
             $errors[] = 'Mensagem muito curta (mínimo 10 caracteres)';
+        } elseif(!$this->validateMaxLength($data['mensagem'], 1000)) {
+            $errors[] = 'Mensagem ultrapassa o limite máximo de 1000 caracteres';
         }
 
         return [
