@@ -35,8 +35,8 @@
         <li><a href="<?= url('blog') ?>">Blog</a></li>
         <li><a href="<?= url('contact') ?>" class="btn-outline offcanvas-btn">Contato</a></li>
     </ul>
-    <div class="offcanvas-footer">
+   <!-- <div class="offcanvas-footer">
         <p>Vamos criar algo incrível.</p>
-        <a href="mailto:contato@vnicidigital.com.br" class="offcanvas-email">contato@vnicidigital.com.br</a>
-    </div>
+        <a href="mailto:<?= EMAIL_TO ?>" class="offcanvas-email"><?= EMAIL_TO ?></a>
+    </div>-->
 </aside>
