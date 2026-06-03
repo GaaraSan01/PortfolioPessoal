@@ -324,3 +324,24 @@
         </div>
     </div>
 </section>
+
+<!-- Call to Action Section -->
+<section class="about-cta-section" style="padding: 6rem 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+    <div class="container reveal">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 2rem; color: #fff;">
+            Gostou da minha <span class="highlight">trajetória?</span>
+        </h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Confira meus projetos ou entre em contato para conversarmos sobre sua próxima ideia.
+        </p>
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <a href="<?= url('projects') ?>" class="submit-btn hover-trigger" style="margin-top: 0; padding: 1rem 2.5rem; border-radius: 4px; display: inline-flex; width: auto; font-size: 1rem;">
+                Ver Projetos
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href="<?= url('contact') ?>" class="contact-cta-btn hover-trigger">
+                Entrar em Contato
+            </a>
+        </div>
+    </div>
+</section>
