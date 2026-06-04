@@ -80,21 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 render:
 $pageTitle = $isEdit ? 'Editar Post' : 'Novo Post';
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $pageTitle ?> — Admin VH</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/admin/assets/css/admin.css">
-    <meta name="robots" content="noindex, nofollow">
-</head>
-<body class="admin-body">
-<?php include dirname(__DIR__) . '/partials/sidebar.php'; ?>
-<main class="admin-main">
-    <?php include dirname(__DIR__) . '/partials/topbar.php'; ?>
-    <div class="admin-content">
+<?php
+$page_title = $pageTitle . ' — Admin VH';
+$body_class = 'admin-body';
+include dirname(__DIR__) . '/partials/header.php';
+?>
+
         <div class="page-header">
             <div>
                 <a href="<?= admin_url('posts/index.php') ?>" class="back-link-admin">← Posts</a>
@@ -179,11 +170,13 @@ console.log('Exemplo de código');
                 <a href="<?= admin_url('posts/index.php') ?>" class="btn-secondary">Cancelar</a>
             </div>
         </form>
-    </div>
-</main>
 
+<?php 
+$extra_js = '
 <!-- marked.js para preview Markdown -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="<?= BASE_URL ?>/admin/assets/js/admin.js"></script>
-</body>
-</html>
+<script src="' . BASE_URL . '/admin/assets/js/admin.js"></script>
+';
+include dirname(__DIR__) . '/partials/footer.php'; 
+?>
+

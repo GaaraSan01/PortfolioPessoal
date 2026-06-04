@@ -12,7 +12,7 @@
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Redirecionar sitemap.xml para o gerador dinâmico (regra independente)
-    RewriteRule ^sitemap\.xml$ public/sitemap.php [L]
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
     # ============================================
     # PERMITIR ACESSO A ARQUIVOS PÚBLICOS
@@ -99,7 +99,13 @@ Options +FollowSymLinks
     Deny from all
 </FilesMatch>
 
-# Proteger arquivos sensíveis
+# Proteger arquivos de infraestrutura e dependências
+<FilesMatch "^(Dockerfile|docker-compose\.yml|composer\.json|composer\.lock|package\.json|package-lock\.json)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger arquivos sensíveis por extensão
 <FilesMatch "\.(ini|log|md)$">
     Order allow,deny
     Deny from all
