@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="input-group">
-                    <input type="tel" id="number" name="number" required placeholder=" " autocomplete="number" class="hover-trigger">
+                    <input type="tel" id="number" name="number" required placeholder=" " autocomplete="tel" class="hover-trigger">
                     <label for="number">Seu Numero</label>
                     <div class="line-bg"></div>
                 </div>
