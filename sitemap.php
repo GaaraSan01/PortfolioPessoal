@@ -3,7 +3,8 @@
 // DYNAMIC SITEMAP GENERATOR
 // ============================================
 
-require_once __DIR__ . '/../config/config.php';
+define('ROOT', __DIR__);
+require_once ROOT . '/config/config.php';
 require_once ROOT . '/core/Database.php';
 
 header("Content-Type: application/xml; charset=utf-8");
@@ -12,7 +13,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
 
 // 1. Static Pages
-$baseUrl = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+$baseUrl = rtrim(BASE_URL ?: (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'), '/');
 $pages = [
     '',
     '/projects',

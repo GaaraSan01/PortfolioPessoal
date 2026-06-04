@@ -5,21 +5,12 @@ $pageTitle = 'Projetos';
 $projects  = load_projects();
 $flash     = $_SESSION['flash'] ?? null; unset($_SESSION['flash']);
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projetos — Admin VH</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/admin/assets/css/admin.css">
-    <meta name="robots" content="noindex, nofollow">
-</head>
-<body class="admin-body">
-<?php include dirname(__DIR__) . '/partials/sidebar.php'; ?>
-<main class="admin-main">
-    <?php include dirname(__DIR__) . '/partials/topbar.php'; ?>
-    <div class="admin-content">
+<?php
+$page_title = 'Projetos — Admin VH';
+$body_class = 'admin-body';
+include dirname(__DIR__) . '/partials/header.php';
+?>
+
         <div class="page-header">
             <div>
                 <h2>Projetos</h2>
@@ -63,7 +54,6 @@ $flash     = $_SESSION['flash'] ?? null; unset($_SESSION['flash']);
             </tbody>
         </table>
         <?php endif; ?>
-    </div>
-</main>
-</body>
-</html>
+
+<?php include dirname(__DIR__) . '/partials/footer.php'; ?>
+

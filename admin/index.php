@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/auth.php';
 
-// Já logado?
 if (!empty($_SESSION['admin_logged_in'])) {
     header('Location: ' . BASE_URL . '/admin/dashboard.php');
     exit;
@@ -42,18 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin — Login</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/admin/assets/css/admin.css">
-    <meta name="robots" content="noindex, nofollow">
-</head>
-<body class="admin-login-body">
+<?php
+$page_title = 'Admin — Login';
+$body_class = 'admin-login-body';
+$hide_layout = true;
+include __DIR__ . '/partials/header.php';
+?>
 
 <div class="login-wrapper">
     <div class="login-card">
@@ -79,5 +72,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-</body>
-</html>
+<?php include __DIR__ . '/partials/footer.php'; ?>

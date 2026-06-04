@@ -7,32 +7,12 @@ $posts    = load_posts();
 $pub_proj = count(array_filter($projects, fn($p) => ($p['status'] ?? '') === 'published'));
 $pub_post = count(array_filter($posts, fn($p) => ($p['status'] ?? '') === 'published'));
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard — Admin VH</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<?php
+$page_title = 'Dashboard — Admin VH';
+$body_class = 'admin-body';
+include __DIR__ . '/partials/header.php';
+?>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= uploads('favicon/favicon-32x32.png') ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= uploads('favicon/favicon-16x16.png') ?>">
-    <link rel="shortcut icon" href="<?= uploads('favicon/favicon.ico') ?>" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= uploads('favicon/apple-touch-icon.png') ?>">
-    <link rel="manifest" href="<?= uploads('favicon/site.webmanifest') ?>">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/admin/assets/css/admin.css">
-    <meta name="robots" content="noindex, nofollow">
-</head>
-<body class="admin-body">
-
-<?php include __DIR__ . '/partials/sidebar.php'; ?>
-
-<main class="admin-main">
-    <?php include __DIR__ . '/partials/topbar.php'; ?>
-
-    <div class="admin-content">
         <div class="page-header">
             <h2>Dashboard</h2>
             <p>Bem-vindo de volta, <strong><?= htmlspecialchars($_SESSION['admin_user'] ?? 'Admin') ?></strong>.</p>
@@ -136,8 +116,5 @@ $pub_post = count(array_filter($posts, fn($p) => ($p['status'] ?? '') === 'publi
                 </table>
             </div>
         </div>
-    </div>
-</main>
 
-</body>
-</html>
+<?php include __DIR__ . '/partials/footer.php'; ?>
