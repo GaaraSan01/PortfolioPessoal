@@ -50,6 +50,10 @@
                 <span>TypeScript</span>
             </span>
             <span class="tech-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJs">
+                <span>NodeJS</span>
+            </span>
+            <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
                 <span>Python</span>
             </span>
@@ -125,6 +129,10 @@
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
                 <span>TypeScript</span>
+            </span>
+            <span class="tech-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJs">
+                <span>NodeJS</span>
             </span>
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
