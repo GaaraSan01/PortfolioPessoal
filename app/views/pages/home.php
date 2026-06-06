@@ -46,7 +46,7 @@
 
         <div class="project-list">
             <?php foreach ($projects as $project): ?>
-            <a href="<?= View::escape($project['url']) ?>" class="project-item hover-trigger reveal" data-image="<?= View::escape($project['image']) ?>" target="_blank">
+            <a href="<?= View::escape($project['url']) ?>" class="project-item hover-trigger reveal" data-image="<?= View::escape($project['image']) ?>">
                 <div class="project-details">
                     <span class="project-num"><?= View::escape($project['num']) ?></span>
                     <h3><?= View::escape($project['title']) ?></h3>
