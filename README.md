@@ -18,7 +18,7 @@
 ## 📋 Sumário
 
 - [Sobre o Projeto](#-sobre-o-projeto)
-- [Demonstração](#-demonstração)
+- [Demonstração](#demonstração)
 - [Arquitetura e Estrutura](#-arquitetura-e-estrutura)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Funcionalidades](#-funcionalidades)
