@@ -47,7 +47,7 @@ try {
     $stmt = $pdo->query("SELECT slug, date_iso FROM posts WHERE status = 'published'");
     while ($row = $stmt->fetch()) {
         echo '  <url>' . PHP_EOL;
-        echo '    <loc>' . $baseUrl . '/blog/show/' . $row['slug'] . '</loc>' . PHP_EOL;
+        echo '    <loc>' . $baseUrl . '/blog/post/' . $row['slug'] . '</loc>' . PHP_EOL;
         echo '    <lastmod>' . $row['date_iso'] . '</lastmod>' . PHP_EOL;
         echo '    <changefreq>monthly</changefreq>' . PHP_EOL;
         echo '    <priority>0.6</priority>' . PHP_EOL;
