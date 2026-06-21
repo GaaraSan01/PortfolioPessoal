@@ -5,7 +5,6 @@
 // --- 1. LÓGICA DE CARREGAMENTO ---
 const preloader = document.getElementById('preloader');
 const titleAnimation = document.getElementsByClassName('stroke-text-svg-animacao');
-console.log(titleAnimation)
 
 function finishLoading() {
     document.body.classList.add('loaded');
