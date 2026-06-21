@@ -86,7 +86,7 @@ img {
     animation-play-state: running;
 }
 
-@media(min-width: 1252px){
+@media(min-width: 1253px){
     .hidden-desktop {
         display: none;
     }
