@@ -60,10 +60,42 @@ img {
 .highlight {
     color: var(--accent);
 }
-
-.stroke-text {
+/*Animação IMPACTANTE*/
+.stroke-text-svg-animacao {
+    fill: transparent;
     -webkit-text-stroke: 1px #fff;
-    color: transparent;
+    stroke: #fff ;
+    stroke-width: 2px;
+    stroke-dasharray: 700;
+    stroke-dashoffset: 700;
+    animation: desenhar 3s linear forwards;
+    animation-play-state: paused;
+    animation-delay: .5s;
+
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+@keyframes desenhar {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.stroke-text-svg-animacao.animar {
+    animation-play-state: running;
+}
+
+@media(min-width: 1252px){
+    .hidden-desktop {
+        display: none;
+    }
+}
+
+@media(max-width: 1252px){
+    .stroke-text-svg-animacao {
+        display: none;
+    }
 }
 
 .noise-overlay {
