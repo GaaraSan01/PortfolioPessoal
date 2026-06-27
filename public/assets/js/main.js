@@ -1,7 +1,3 @@
-// ===================================================================
-// PORTFOLIO VINICIUS HENRIQUE 
-// ===================================================================
-
 // --- 1. LÓGICA DE CARREGAMENTO ---
 const preloader = document.getElementById('preloader');
 const titleAnimation = document.getElementsByClassName('stroke-text-svg-animacao');
@@ -9,7 +5,9 @@ const titleAnimation = document.getElementsByClassName('stroke-text-svg-animacao
 function finishLoading() {
     document.body.classList.add('loaded');
     document.querySelectorAll('.reveal-hero').forEach(el => el.classList.add('active'));
-    titleAnimation[0].classList.add('animar')
+    if(titleAnimation[0] != undefined){
+        titleAnimation[0].classList.add('animar');
+    }
 }
 
 window.addEventListener('load', finishLoading);
