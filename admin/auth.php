@@ -1,7 +1,4 @@
 <?php
-// =============================================
-// ADMIN GUARD — inclua no topo de cada página
-// =============================================
 
 define('ADMIN_PATH', __DIR__);
 define('ROOT', dirname(__DIR__));
