@@ -14,6 +14,8 @@ function loadEnv($path) {
     }
 }
 
+
+//define('ROOT', dirname(__DIR__));
 // Carrega o ficheiro .env
 loadEnv(ROOT . '/.env');
 
@@ -83,7 +85,13 @@ if (ENVIRONMENT === 'development') {
 // Configurações seguras de sessão
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 1); // Mude para 1 quando usar HTTPS
+
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    ini_set('session.cookie_secure', 1);
+} else {
+    ini_set('session.cookie_secure', 0); // Garante 0 para localhost/HTTP
+}
+// ini_set('session.cookie_secure', 1); // Mude para 1 quando usar HTTPS
 
 // Inicia sessão se não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {

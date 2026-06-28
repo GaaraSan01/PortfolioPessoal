@@ -1,4 +1,3 @@
-w
 <?php
 require_once dirname(__DIR__) . '/auth.php';
 admin_auth_check();

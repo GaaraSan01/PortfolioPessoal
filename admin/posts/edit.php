@@ -170,7 +170,6 @@ console.log('Exemplo de código');
                 <a href="<?= admin_url('posts/index.php') ?>" class="btn-secondary">Cancelar</a>
             </div>
         </form>
-
 <?php 
 $extra_js = '
 <!-- marked.js para preview Markdown -->
@@ -179,4 +178,3 @@ $extra_js = '
 ';
 include dirname(__DIR__) . '/partials/footer.php'; 
 ?>
-
