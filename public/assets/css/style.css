@@ -2029,6 +2029,191 @@ body.loaded .preloader {
     stroke: #fff;
 }
 
+/* --- BLOG SEARCH BAR --- */
+.blog-search {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 3rem;
+    max-width: 680px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-search:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(255, 68, 0, 0.1), 0 0 60px rgba(255, 68, 0, 0.05);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.blog-search-inner {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 0 1.5rem;
+    gap: 1rem;
+    position: relative;
+}
+
+.blog-search-icon {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: color 0.3s;
+}
+
+.blog-search:focus-within .blog-search-icon {
+    color: var(--accent);
+}
+
+.blog-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 1.2rem 0;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    outline: none;
+    cursor: text;
+}
+
+.blog-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    transition: color 0.3s;
+}
+
+.blog-search-input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Remove default search X on webkit browsers */
+.blog-search-input::-webkit-search-cancel-button,
+.blog-search-input::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.blog-search-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.blog-search-clear:hover {
+    color: var(--accent);
+    background: rgba(255, 68, 0, 0.1);
+}
+
+.blog-search-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--accent);
+    border: none;
+    padding: 1.2rem 2rem;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.blog-search-btn:hover {
+    background: #ff5511;
+    padding-right: 2.5rem;
+}
+
+.blog-search-btn svg {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-search-btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* Search Status */
+.blog-search-status {
+    margin-top: 1.5rem;
+    padding: 1rem 0;
+}
+
+.blog-search-status p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.blog-search-status strong {
+    color: #fff;
+}
+
+.search-clear-link {
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: opacity 0.3s;
+    margin-left: auto;
+}
+
+.search-clear-link:hover {
+    opacity: 0.7;
+}
+
+/* Empty State */
+.blog-empty-state {
+    text-align: center;
+    padding: 6rem 2rem;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+}
+
+.blog-empty-icon {
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.blog-empty-state h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.blog-empty-state p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.blog-empty-state a {
+    color: var(--accent);
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.blog-empty-state a:hover {
+    opacity: 0.7;
+}
+
 /* --- CONTATO PAGE (REESTRUTURADA) --- */
 .contact-hero h1 {
     line-height: 1;
@@ -2341,6 +2526,43 @@ body.loaded .preloader {
 
     .blog-card h2 {
         font-size: 1.8rem;
+    }
+
+    .blog-search {
+        flex-direction: column;
+        border-radius: 12px;
+        max-width: 100%;
+    }
+
+    .blog-search-inner {
+        padding: 0 1.2rem;
+    }
+
+    .blog-search-input {
+        font-size: 0.95rem;
+        padding: 1rem 0;
+    }
+
+    .blog-search-btn {
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .blog-search-status p {
+        font-size: 0.9rem;
+    }
+
+    .search-clear-link {
+        margin-left: 0;
+    }
+
+    .blog-empty-state {
+        padding: 4rem 1.5rem;
+    }
+
+    .blog-empty-state h3 {
+        font-size: 1.4rem;
     }
 
     .info-link {
