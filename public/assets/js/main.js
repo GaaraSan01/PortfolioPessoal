@@ -338,10 +338,11 @@ if (form) {
 
         // Valida todos os campos
         const nomeValido = validateNome();
+        const numberValido = validateNumber();
         const emailValido = validateEmail();
         const mensagemValida = validateMensagem();
 
-        if (!nomeValido || !emailValido || !mensagemValida) {
+        if (!nomeValido || !numberValido || !emailValido || !mensagemValida) {
             showToast('Por favor, corrija os erros no formulário', 'error');
             return;
         }
@@ -365,10 +366,21 @@ if (form) {
                 setSuccessState();
                 showToast(data.message, 'success');
                 form.reset();
-                [nomeInput, emailInput, msgInput].forEach(removeError);
+                [nomeInput, numberInput, emailInput, msgInput].forEach(removeError);
             } else {
                 setErrorState('TENTE NOVAMENTE');
-                showToast(data.message || 'Erro ao enviar mensagem', 'error');
+
+                if (data.errors && typeof data.errors === 'object') {
+                    // Show field-specific errors
+                    if (data.errors.nome) showError(nomeInput, data.errors.nome);
+                    if (data.errors.number) showError(numberInput, data.errors.number);
+                    if (data.errors.email) showError(emailInput, data.errors.email);
+                    if (data.errors.mensagem) showError(msgInput, data.errors.mensagem);
+
+                    showToast('Por favor, corrija os erros no formulário', 'error');
+                } else {
+                    showToast(data.message || 'Erro ao enviar mensagem', 'error');
+                }
             }
 
         } catch (error) {

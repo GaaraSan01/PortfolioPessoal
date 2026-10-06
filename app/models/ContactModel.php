@@ -9,31 +9,31 @@ class ContactModel extends Model
 
         
         if (empty($data['nome'])) {
-            $errors[] = 'Nome é obrigatório';
+            $errors['nome'] = 'Nome é obrigatório';
         } elseif (!$this->validateName($data['nome'])) {
-            $errors[] = 'Nome inválido';
-        }elseif(!$this->validateMaxLength($data['mensagem'], 50)) {
-            $errors[] = 'Nome ultrapassa o limite máximo de 50 caracteres';
+            $errors['nome'] = 'Nome inválido';
+        } elseif (!$this->validateMaxLength($data['nome'], 50)) {
+            $errors['nome'] = 'Nome ultrapassa o limite máximo de 50 caracteres';
         }
 
         if (empty($data['number'])) {
-            $errors[] = 'Numero é obrigatório';
+            $errors['number'] = 'Numero é obrigatório';
         } elseif (!$this->validateNumber($data['number'])) {
-            $errors[] = 'Numero inválido';
+            $errors['number'] = 'Numero inválido';
         }
 
         if (empty($data['email'])) {
-            $errors[] = 'E-mail é obrigatório';
+            $errors['email'] = 'E-mail é obrigatório';
         } elseif (!$this->validateEmail($data['email'])) {
-            $errors[] = 'E-mail inválido';
+            $errors['email'] = 'E-mail inválido';
         }
 
         if (empty($data['mensagem'])) {
-            $errors[] = 'Mensagem é obrigatória';
+            $errors['mensagem'] = 'Mensagem é obrigatória';
         } elseif (!$this->validateMinLength($data['mensagem'], 10)) {
-            $errors[] = 'Mensagem muito curta (mínimo 10 caracteres)';
-        } elseif(!$this->validateMaxLength($data['mensagem'], 1000)) {
-            $errors[] = 'Mensagem ultrapassa o limite máximo de 1000 caracteres';
+            $errors['mensagem'] = 'Mensagem muito curta (mínimo 10 caracteres)';
+        } elseif (!$this->validateMaxLength($data['mensagem'], 1000)) {
+            $errors['mensagem'] = 'Mensagem ultrapassa o limite máximo de 1000 caracteres';
         }
 
         return [
