@@ -95,6 +95,8 @@ if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
 }
 // ini_set('session.cookie_secure', 1); // Mude para 1 quando usar HTTPS
 
+const ADMIN_IDLE_TIMEOUT = 7200; // 2h sem atividade encerra a sessão do admin (painel e prévia de rascunhos)
+
 // Inicia sessão se não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -118,7 +120,10 @@ function uploads($path){
  * Gera URL de asset
  */
 function asset($path) {
-    return BASE_URL . '/public/assets/' . ltrim($path, '/');
+    $path = ltrim($path, '/');
+    $file = ROOT . '/public/assets/' . $path;
+    // ?v= muda quando o arquivo muda e fura o cache de 1 ano do .htaccess
+    return BASE_URL . '/public/assets/' . $path . (is_file($file) ? '?v=' . filemtime($file) : '');
 }
 
 /**

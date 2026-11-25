@@ -45,6 +45,49 @@ class Controller
         return $_SESSION['csrf_token'];
     }
 
+    // Admin logado vê rascunhos (prévia); mesma expiração por inatividade do painel
+    protected function isAdmin()
+    {
+        return ($_SESSION['admin_logged_in'] ?? false) === true
+            && time() - ($_SESSION['admin_last_seen'] ?? 0) <= ADMIN_IDLE_TIMEOUT;
+    }
+
+    // $table/$where/$order vêm só do código; valores do usuário vão em $params
+    protected function paginate($table, $where, array $params, $order, $perPage)
+    {
+        try {
+            $pdo = Database::getInstance();
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM $table WHERE $where");
+            $stmt->execute($params);
+            $totalPages = max(1, (int)ceil($stmt->fetchColumn() / $perPage));
+            $page = min(max(1, (int)($_GET['page'] ?? 1)), $totalPages);
+            $offset = ($page - 1) * $perPage;
+            $stmt = $pdo->prepare("SELECT * FROM $table WHERE $where ORDER BY $order LIMIT $perPage OFFSET $offset");
+            $stmt->execute($params);
+            return [$stmt->fetchAll(), $page, $totalPages];
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return [[], 1, 1];
+        }
+    }
+
+    // Rascunho conta como inexistente (404) para quem não é admin
+    protected function findPublishedBySlug($table, $slug)
+    {
+        try {
+            $stmt = Database::getInstance()->prepare("SELECT * FROM $table WHERE slug = ?");
+            $stmt->execute([$slug]);
+            $row = $stmt->fetch();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+        if (!$row || (($row['status'] ?? '') !== 'published' && !$this->isAdmin())) {
+            return null;
+        }
+        return $row;
+    }
+
     protected function isPost()
     {
         return $_SERVER['REQUEST_METHOD'] === 'POST';

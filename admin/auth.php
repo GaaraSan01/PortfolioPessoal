@@ -10,7 +10,6 @@ require_once ROOT . '/core/Seo.php';
 
 // Credenciais agora são validadas através do banco de dados (tabela users)
 
-const ADMIN_IDLE_TIMEOUT = 7200; // 2h sem atividade encerra a sessão
 const LOGIN_MAX_ATTEMPTS = 5;
 const LOGIN_WINDOW = 900; // 15 min
 
