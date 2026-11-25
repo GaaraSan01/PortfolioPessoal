@@ -64,7 +64,7 @@
                 <div class='value'><?= htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8') ?></div>
             </div>
             <div class='field'>
-                <div class='label'>Numero:</div>
+                <div class='label'>Telefone:</div>
                 <div class='value'><?= htmlspecialchars($data['number'], ENT_QUOTES, 'UTF-8') ?></div>
             </div>
             <div class='field'>

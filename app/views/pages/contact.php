@@ -20,7 +20,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <h3>Disponibilidade</h3>
-                <p>Disponível para novos projetos a partir de <strong>Junho 2026</strong>. Aceito projetos freelance e CLT.</p>
+                <p>Aberto a <strong>projetos freelance</strong> e <strong>vagas CLT</strong>.</p>
             </div>
 
             <!-- Bloco: E-mail -->
@@ -51,7 +51,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
                 <h3>Localização</h3>
-                <p>Curitiba - PR, Brasil.<br>Trabalho <strong>remoto</strong> para qualquer lugar do mundo.</p>
+                <p>Grande Curitiba, PR.<br>Trabalho <strong>remoto</strong> para qualquer lugar do mundo.</p>
             </div>
         </div>
 

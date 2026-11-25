@@ -12,10 +12,10 @@
         
         <div class="error-actions" style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
             <a href="<?= url('') ?>" class="btn-primary" style="padding: 1.2rem 2.5rem; background: var(--accent-strong); color: #fff; font-weight: 700; border-radius: 4px; transition: 0.3s;">
-                Voltar para o Início
+                Voltar para o início
             </a>
             <a href="<?= url('projects') ?>" class="btn-outline" style="padding: 1.2rem 2.5rem; border: 1px solid var(--border); border-radius: 4px; transition: 0.3s;">
-                Ver Projetos
+                Ver projetos
             </a>
         </div>
     </div>

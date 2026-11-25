@@ -159,15 +159,15 @@ if (form) {
         const valor = nomeInput.value.trim();
 
         if (valor === '') {
-            showError(nomeInput, 'Por favor, preencha seu nome');
+            showError(nomeInput, 'Informe seu nome');
             return false;
         }
         if (valor.length < 2) {
-            showError(nomeInput, 'Nome muito curto');
+            showError(nomeInput, 'Digite seu nome completo');
             return false;
         }
         if (/[0-9]/.test(valor)) {
-            showError(nomeInput, 'Nome não pode conter números');
+            showError(nomeInput, 'Use apenas letras no nome');
             return false;
         }
 
@@ -180,13 +180,13 @@ if (form) {
         const valor = numberInput.value.trim();
         const numberRegex = /^[\d\s\-\(\)\+]+$/;
 
-        if (!numberRegex.test(valor) || valor.length < 10) {
-            showError(numberInput, 'Número de celular inválido!');
+        if (valor === '') {
+            showError(numberInput, 'Informe seu WhatsApp ou telefone');
             return false;
         }
-        if (valor === '') {
-            showError(numberInput, 'Por favor, preencha seu número');
-            return false
+        if (!numberRegex.test(valor) || valor.length < 10) {
+            showError(numberInput, 'Use DDD + número, ex.: (41) 99999-9999');
+            return false;
         }
 
         removeError(numberInput);
@@ -198,11 +198,11 @@ if (form) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (valor === '') {
-            showError(emailInput, 'Por favor, preencha seu e-mail');
+            showError(emailInput, 'Informe seu e-mail');
             return false;
         }
         if (!emailRegex.test(valor)) {
-            showError(emailInput, 'E-mail inválido');
+            showError(emailInput, 'Confira o e-mail, ex.: nome@empresa.com');
             return false;
         }
 
@@ -214,11 +214,11 @@ if (form) {
         const valor = msgInput.value.trim();
 
         if (valor === '') {
-            showError(msgInput, 'Por favor, escreva sua mensagem');
+            showError(msgInput, 'Escreva sua mensagem');
             return false;
         }
         if (valor.length < 10) {
-            showError(msgInput, `Mensagem muito curta (mínimo 10 caracteres, você tem ${valor.length})`);
+            showError(msgInput, `Escreva pelo menos 10 caracteres (faltam ${10 - valor.length})`);
             return false;
         }
 
@@ -342,7 +342,7 @@ if (form) {
         const mensagemValida = validateMensagem();
 
         if (!nomeValido || !numberValido || !emailValido || !mensagemValida) {
-            showToast('Por favor, corrija os erros no formulário', 'error');
+            showToast('Revise os campos destacados', 'error');
             return;
         }
 
@@ -376,9 +376,9 @@ if (form) {
                     if (data.errors.email) showError(emailInput, data.errors.email);
                     if (data.errors.mensagem) showError(msgInput, data.errors.mensagem);
 
-                    showToast('Por favor, corrija os erros no formulário', 'error');
+                    showToast('Revise os campos destacados', 'error');
                 } else {
-                    showToast(data.message || 'Erro ao enviar mensagem', 'error');
+                    showToast(data.message || 'Não foi possível enviar. Tente novamente.', 'error');
                 }
             }
 

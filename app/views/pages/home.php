@@ -28,9 +28,9 @@
 <div class="marquee">
     <div class="track">
             <div class="content">
-                &nbsp;FULL STACK / PYTHON / VUEJS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
-                &nbsp;FULL STACK / PYTHON / VUEJS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
-                &nbsp;FULL STACK / PYTHON / VUEJS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
+                &nbsp;FULL STACK / PYTHON / VUE.JS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
+                &nbsp;FULL STACK / PYTHON / VUE.JS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
+                &nbsp;FULL STACK / PYTHON / VUE.JS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
             </div>
     </div>
 </div>
@@ -81,7 +81,7 @@
             <div class="skills-wrapper reveal">
                 <div class="skill-card">
                     <h3>Frontend</h3>
-                    <p>React, Next.js, Tailwind, VueJs, NuxtJs</p>
+                    <p>React, Next.js, Tailwind, Vue.js, Nuxt</p>
                 </div>
                 <div class="skill-card">
                     <h3>Backend</h3>

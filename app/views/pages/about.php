@@ -22,8 +22,8 @@
                 <span>Java</span>
             </span>
             <span class="tech-item">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C-Sharp">
-                <span>C-Sharp</span>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">
+                <span>C#</span>
             </span>
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal bash">
@@ -50,8 +50,8 @@
                 <span>TypeScript</span>
             </span>
             <span class="tech-item">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJs">
-                <span>NodeJS</span>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                <span>Node.js</span>
             </span>
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
@@ -103,8 +103,8 @@
                 <span>Java</span>
             </span>
             <span class="tech-item">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C-Sharp">
-                <span>C-Sharp</span>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">
+                <span>C#</span>
             </span>
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Terminal bash">
@@ -131,8 +131,8 @@
                 <span>TypeScript</span>
             </span>
             <span class="tech-item">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJs">
-                <span>NodeJS</span>
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                <span>Node.js</span>
             </span>
             <span class="tech-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
@@ -228,8 +228,8 @@
             <div class="timeline-item timeline-left reveal">
                 <div class="timeline-content">
                     <div class="timeline-badge">Início</div>
-                    <h3>Estudos Autodidata</h3>
-                    <p>Começei com o estudo de JavaScript pelo Curso em Vídeo do Professor Guanabara — o ponto de partida para a minha carreira na programação.</p>
+                    <h3>Estudos autodidatas</h3>
+                    <p>Comecei com o estudo de JavaScript pelo Curso em Vídeo do Professor Guanabara — o ponto de partida para a minha carreira na programação.</p>
                     <div class="timeline-tags">
                         <span>JavaScript</span>
                         <span>Lógica de Programação</span>
@@ -275,7 +275,7 @@
                         <span>PostgreSQL</span>
                     </div>
                     <a href="https://cursos.alura.com.br/user/vini2003henri12395/fullCertificate/3a3df448acd37c422397fa2eb6b764dd" target="_blank" rel="noopener noreferrer" class="timeline-link hover-trigger">
-                        <span>Ver Certificados</span>
+                        <span>Ver certificados</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>
@@ -318,7 +318,7 @@
                         <span>Segurança da Informação</span>
                     </div>
                     <a href="https://coursera.org/share/6c137f43ff3028906d5805c2483f135c" target="_blank" rel="noopener noreferrer" class="timeline-link hover-trigger">
-                        <span>Ver Certificado</span>
+                        <span>Ver certificado</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>
@@ -344,11 +344,11 @@
         </p>
         <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
             <a href="<?= url('projects') ?>" class="submit-btn hover-trigger" style="margin-top: 0; padding: 1rem 2.5rem; border-radius: 4px; display: inline-flex; width: auto; font-size: 1rem;">
-                Ver Projetos
+                Ver projetos
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
             <a href="<?= url('contact') ?>" class="contact-cta-btn hover-trigger">
-                Entrar em Contato
+                Fale comigo
             </a>
         </div>
     </div>

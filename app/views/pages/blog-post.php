@@ -4,7 +4,7 @@
         <div class="container">
             <a href="<?= url('blog') ?>" class="back-link reveal-hero">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                Todos os Artigos
+                Todos os artigos
             </a>
             <div class="post-hero-meta reveal-hero">
                 <span class="post-category"><?= htmlspecialchars($post['category']) ?></span>
@@ -48,7 +48,7 @@
             <div class="post-back-cta reveal">
                 <a href="<?= url('blog') ?>" class="project-nav-back hover-trigger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                    Todos os Artigos
+                    Todos os artigos
                 </a>
             </div>
         </div>

@@ -10,7 +10,7 @@
     </ul>
 
     <!-- Hamburger Button (Mobile/Tablet) -->
-    <button class="hamburger-btn hover-trigger" aria-label="Abrir Menu">
+    <button class="hamburger-btn hover-trigger" aria-label="Abrir menu">
         <span class="hamburger-line line-1"></span>
         <span class="hamburger-line line-2"></span>
         <span class="hamburger-line line-3"></span>
@@ -24,7 +24,7 @@
 <aside class="offcanvas-menu">
     <div class="offcanvas-header">
         <span class="logo">VH<span class="dot">.</span></span>
-        <button class="close-menu-btn hover-trigger" aria-label="Fechar Menu">
+        <button class="close-menu-btn hover-trigger" aria-label="Fechar menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
     </div>
