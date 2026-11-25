@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "php-dev",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["-S", "localhost:8000", "dev/router.php"],
+      "port": 8000
+    },
+    {
+      "name": "php-dev-alt",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["-S", "localhost:8002", "dev/router.php"],
+      "port": 8002,
+      "autoPort": false
+    }
+  ]
+}
