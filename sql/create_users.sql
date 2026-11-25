@@ -3,8 +3,8 @@
 CREATE TABLE IF NOT EXISTS users (
 
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    username        TEXT NOT NULL,
+    username        TEXT NOT NULL UNIQUE,
     password_hash   TEXT,
-    created_at      DATETIME CURRENT_TIMESTAMP
-    
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
+
 );

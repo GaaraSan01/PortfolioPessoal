@@ -7,11 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewEl = document.querySelector('.preview-content');
 
     function renderPreview() {
-        if (!mdInput || !previewEl || typeof marked === 'undefined') return;
-        let html = marked.parse(mdInput.value || '');
-        // Sanitização básica para o preview (remover <script>)
-        html = html.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gim, "<strong>[Script Removido por Segurança]</strong>");
-        previewEl.innerHTML = html;
+        if (!mdInput || !previewEl || typeof marked === 'undefined' || typeof DOMPurify === 'undefined') return;
+        previewEl.innerHTML = DOMPurify.sanitize(marked.parse(mdInput.value || ''));
     }
 
     tabBtns.forEach(btn => {

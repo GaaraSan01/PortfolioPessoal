@@ -1,6 +1,6 @@
 <header class="admin-topbar">
     <div class="topbar-left">
-        <h1 class="page-title"><?= $pageTitle ?? 'Admin' ?></h1>
+        <h1 class="page-title"><?= htmlspecialchars($pageTitle ?? 'Admin') ?></h1>
     </div>
     <div class="topbar-right">
         <span class="topbar-user"><?= htmlspecialchars($_SESSION['admin_user'] ?? 'Admin') ?></span>

@@ -37,14 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image = trim($_POST['image'] ?? '');
     $url = trim($_POST['url'] ?? '');
     $technologies = array_filter(array_map('trim', explode(',', $_POST['technologies'] ?? '')));
-    $status = $_POST['status'] ?? 'draft';
+    $status = in_array($_POST['status'] ?? '', ['published', 'draft'], true) ? $_POST['status'] : 'draft';
+    $oldImage = $project['image'] ?? null;
+    $uploaded = false;
 
     if (!$title)
         $errors[] = 'Título é obrigatório.';
     if (!$category)
         $errors[] = 'Categoria é obrigatória.';
+    if (!valid_project_url($url))
+        $errors[] = 'URL inválida: use um endereço http:// ou https://.';
 
-    if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
+    if (empty($errors) && isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = ROOT . '/public/uploads/';
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
@@ -64,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetFile)) {
                 $image = $filename;
+                $uploaded = true;
             } else {
                 $errors[] = 'Erro ao fazer upload da imagem.';
             }
@@ -75,9 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo = Database::getInstance();
             if ($isEdit) {
                 // Atualizar existente
-                $stmt = $pdo->prepare("UPDATE projects SET slug = ?, title = ?, category = ?, year = ?, image = ?, description = ?, long_description = ?, technologies = ?, url = ?, status = ? WHERE id = ?");
+                // Slug fica fixo na edição para não quebrar URLs já publicadas
+                $stmt = $pdo->prepare("UPDATE projects SET title = ?, category = ?, year = ?, image = ?, description = ?, long_description = ?, technologies = ?, url = ?, status = ? WHERE id = ?");
                 $stmt->execute([
-                    generate_slug($title),
                     $title,
                     $category,
                     $year,
@@ -89,12 +94,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $status,
                     $id
                 ]);
+                if ($uploaded && $oldImage && $oldImage !== $image) {
+                    delete_upload($pdo, $oldImage);
+                }
             } else {
-                // Novo projeto
-                $stmt = $pdo->prepare("INSERT INTO projects (id, slug, title, category, year, image, description, long_description, technologies, url, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                // Novo projeto (id gerado pelo banco)
+                $stmt = $pdo->prepare("INSERT INTO projects (slug, title, category, year, image, description, long_description, technologies, url, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->execute([
-                    uniqid(),
-                    generate_slug($title),
+                    unique_slug($pdo, 'projects', generate_slug($title)),
                     $title,
                     $category,
                     $year,
@@ -111,7 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ' . admin_url('projects/index.php'));
             exit;
         } catch (Exception $e) {
-            $errors[] = 'Erro ao salvar no banco de dados: ' . $e->getMessage();
+            error_log('Admin projects save: ' . $e->getMessage());
+            $errors[] = 'Erro ao salvar no banco de dados.';
         }
     }
 }
@@ -128,7 +136,7 @@ include dirname(__DIR__) . '/partials/header.php';
 <div class="page-header">
     <div>
         <a href="<?= admin_url('projects/index.php') ?>" class="back-link-admin">← Projetos</a>
-        <h2><?= $pageTitle ?></h2>
+        <h2><?= htmlspecialchars($pageTitle) ?></h2>
     </div>
 </div>
 

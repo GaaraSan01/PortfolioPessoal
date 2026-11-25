@@ -11,10 +11,15 @@ $id = $_POST['id'] ?? null;
 if ($id) {
     try {
         $pdo = Database::getInstance();
+        $img = $pdo->prepare("SELECT image FROM projects WHERE id = ?");
+        $img->execute([$id]);
+        $image = $img->fetchColumn();
+
         $stmt = $pdo->prepare("DELETE FROM projects WHERE id = ?");
         $stmt->execute([$id]);
-        
+
         if ($stmt->rowCount() > 0) {
+            delete_upload($pdo, $image ?: null);
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Projeto excluído com sucesso.'];
         } else {
             $_SESSION['flash'] = ['type' => 'error', 'msg' => 'Projeto não encontrado.'];

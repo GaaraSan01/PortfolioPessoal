@@ -24,14 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $title        = trim($_POST['title'] ?? '');
     $category     = trim($_POST['category'] ?? '');
-    $date_display = trim($_POST['date'] ?? date('d M, Y'));
     $date_iso     = trim($_POST['date_iso'] ?? date('Y-m-d'));
+    $date_display = format_post_date($date_iso);
     $excerpt      = trim($_POST['excerpt'] ?? '');
     $content      = $_POST['content'] ?? '';
     $reading_time = (int)($_POST['reading_time'] ?? 5);
-    $status       = $_POST['status'] ?? 'draft';
+    $status       = in_array($_POST['status'] ?? '', ['published', 'draft'], true) ? $_POST['status'] : 'draft';
 
     if (!$title)   $errors[] = 'Título é obrigatório.';
+    if (!$date_display) $errors[] = 'Data inválida.';
     if (!$excerpt) $errors[] = 'Resumo é obrigatório.';
     if (!$content) $errors[] = 'Conteúdo é obrigatório.';
 
@@ -39,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $pdo = Database::getInstance();
             if ($isEdit) {
-                $stmt = $pdo->prepare("UPDATE posts SET slug = ?, title = ?, category = ?, date = ?, date_iso = ?, excerpt = ?, content = ?, reading_time = ?, status = ? WHERE id = ?");
+                // Slug fica fixo na edição para não quebrar URLs já publicadas
+                $stmt = $pdo->prepare("UPDATE posts SET title = ?, category = ?, date = ?, date_iso = ?, excerpt = ?, content = ?, reading_time = ?, status = ? WHERE id = ?");
                 $stmt->execute([
-                    generate_slug($title),
                     $title,
                     $category,
                     $date_display,
@@ -53,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $id
                 ]);
             } else {
-                $stmt = $pdo->prepare("INSERT INTO posts (id, slug, title, category, date, date_iso, excerpt, content, reading_time, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                // id gerado pelo banco
+                $stmt = $pdo->prepare("INSERT INTO posts (slug, title, category, date, date_iso, excerpt, content, reading_time, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->execute([
-                    uniqid(),
-                    generate_slug($title),
+                    unique_slug($pdo, 'posts', generate_slug($title)),
                     $title,
                     $category,
                     $date_display,
@@ -72,7 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ' . admin_url('posts/index.php'));
             exit;
         } catch (Exception $e) {
-            $errors[] = 'Erro ao salvar no banco de dados: ' . $e->getMessage();
+            error_log('Admin posts save: ' . $e->getMessage());
+            $errors[] = 'Erro ao salvar no banco de dados.';
         }
     }
 }
@@ -89,7 +91,7 @@ include dirname(__DIR__) . '/partials/header.php';
         <div class="page-header">
             <div>
                 <a href="<?= admin_url('posts/index.php') ?>" class="back-link-admin">← Posts</a>
-                <h2><?= $pageTitle ?></h2>
+                <h2><?= htmlspecialchars($pageTitle) ?></h2>
             </div>
         </div>
 
@@ -117,11 +119,7 @@ include dirname(__DIR__) . '/partials/header.php';
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Data (exibição) ex: 24 Abr, 2024</label>
-                    <input type="text" name="date" value="<?= htmlspecialchars($post['date'] ?? date('d M, Y')) ?>">
-                </div>
-                <div class="form-group">
-                    <label>Data ISO (para ordenação)</label>
+                    <label>Data de publicação</label>
                     <input type="date" name="date_iso" value="<?= htmlspecialchars($post['date_iso'] ?? date('Y-m-d')) ?>">
                 </div>
                 <div class="form-group">
@@ -173,7 +171,8 @@ console.log('Exemplo de código');
 <?php 
 $extra_js = '
 <!-- marked.js para preview Markdown -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 <script src="' . BASE_URL . '/admin/assets/js/admin.js"></script>
 ';
 include dirname(__DIR__) . '/partials/footer.php'; 

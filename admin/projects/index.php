@@ -20,7 +20,7 @@ include dirname(__DIR__) . '/partials/header.php';
         </div>
 
         <?php if ($flash): ?>
-        <div class="admin-alert <?= $flash['type'] ?>"><?= htmlspecialchars($flash['msg']) ?></div>
+        <div class="admin-alert <?= htmlspecialchars($flash['type']) ?>"><?= htmlspecialchars($flash['msg']) ?></div>
         <?php endif; ?>
 
         <?php if (empty($projects)): ?>
@@ -39,7 +39,7 @@ include dirname(__DIR__) . '/partials/header.php';
                 <td><strong><?= htmlspecialchars($p['title']) ?></strong></td>
                 <td><?= htmlspecialchars($p['category'] ?? '—') ?></td>
                 <td><?= htmlspecialchars($p['year'] ?? '—') ?></td>
-                <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= $p['status'] ?? 'draft' ?></span></td>
+                <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= htmlspecialchars($p['status'] ?? 'draft') ?></span></td>
                 <td class="actions-cell">
                     <a href="<?= admin_url('projects/edit.php?id=' . urlencode($p['id'])) ?>" class="btn-sm">Editar</a>
                     <form method="POST" action="<?= admin_url('projects/delete.php') ?>" onsubmit="return confirm('Excluir este projeto?')">
