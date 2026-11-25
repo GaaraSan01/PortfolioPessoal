@@ -421,3 +421,12 @@ style.textContent = `
 document.head.appendChild(style);
 
 console.log('%c ❤️ Portfolio - ViniciusH.', 'color: #fff; background: #000; padding: 10px; font-size: 14px;');
+
+// Alternância de tema (o tema inicial é aplicado no <head> de layouts/main.php)
+document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+});

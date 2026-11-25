@@ -334,9 +334,9 @@
 </section>
 
 <!-- Call to Action Section -->
-<section class="about-cta-section" style="padding: 6rem 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+<section class="about-cta-section" style="padding: 6rem 0; text-align: center; border-top: 1px solid var(--border);">
     <div class="container reveal">
-        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 2rem; color: #fff;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-primary);">
             Gostou da minha <span class="highlight">trajetória?</span>
         </h2>
         <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
