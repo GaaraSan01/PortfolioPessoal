@@ -5,6 +5,8 @@
     --text-muted: #888;
     --accent: #FF4400;
     /* Laranja vibrante */
+    --accent-strong: #D93A00;
+    /* Fundo de botão com texto branco (contraste AA 4.5:1) */
     --border: rgba(255, 255, 255, 0.1);
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -57,6 +59,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+p {
+    line-height: 1.6;
+}
+
+input,
+textarea,
+button,
+select {
+    font: inherit;
 }
 
 html {
@@ -366,7 +379,7 @@ body.loaded .preloader {
     font-family: var(--font-heading);
     color: var(--accent);
     letter-spacing: 2px;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     display: block;
     margin-bottom: 1rem;
 }
@@ -491,7 +504,7 @@ body.loaded .preloader {
 
 .skill-card p {
     color: var(--text-primary);
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 /* --- FORMULÁRIO PRO (REDESENHADO) --- */
@@ -600,7 +613,7 @@ body.loaded .preloader {
 }
 
 .submit-btn:hover {
-    background: var(--accent);
+    background: var(--accent-strong);
     color: #fff;
     padding-right: 3rem;
 }
@@ -689,6 +702,16 @@ body.loaded .preloader {
 .social-links {
     display: flex;
     gap: 2rem;
+}
+
+/* Área de toque de 44px sem mudar o visual (margem negativa compensa) */
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    margin: -10px;
 }
 
 .social-links .hover-trigger svg {
@@ -1544,7 +1567,7 @@ body.loaded .preloader {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    background: var(--accent);
+    background: var(--accent-strong);
     border: none;
     padding: 1.2rem 2rem;
     color: #fff;
@@ -1559,7 +1582,7 @@ body.loaded .preloader {
 }
 
 .blog-search-btn:hover {
-    background: #ff5511;
+    background: #C23400;
     padding-right: 2.5rem;
 }
 
@@ -1794,7 +1817,9 @@ body.loaded .preloader {
     width: 32px;
     height: 20px;
     z-index: 101;
-    padding: 0;
+    padding: 12px 6px;
+    margin: -12px -6px;
+    box-sizing: content-box;
 }
 
 .hamburger-line {
@@ -1857,6 +1882,8 @@ body.loaded .preloader {
     color: var(--text-primary);
     transition: color 0.3s;
     padding: 0;
+    min-width: 44px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1900,7 +1927,7 @@ body.loaded .preloader {
 }
 
 .offcanvas-btn:hover {
-    background: var(--accent) !important;
+    background: var(--accent-strong) !important;
     color: #fff !important;
 }
 
@@ -2118,7 +2145,7 @@ body.loaded .preloader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--accent);
+    background: var(--accent-strong);
     color: #fff;
     padding: 1.2rem 1.5rem;
     border-radius: 4px;
@@ -2500,4 +2527,24 @@ body.loaded .preloader {
     opacity: 0.3;
     pointer-events: none;
     cursor: not-allowed;
+}
+/* --- MOVIMENTO REDUZIDO --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Sem a animação, o traço do IMPACTANTE ficaria invisível */
+    .stroke-text-svg-animacao {
+        stroke-dashoffset: 0;
+    }
 }

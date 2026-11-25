@@ -15,7 +15,7 @@
             </p>
         </div>
         <div class="hero-image-container reveal-hero delay-3">
-            <img src="<?= uploads('/img-hero.avif') ?>" alt="Setup" class="hero-img">
+            <img src="<?= uploads('/img-hero.avif') ?>" alt="" class="hero-img">
         </div>
     </div>
     <a href="#projetos" class="scroll-indicator hover-trigger reveal-hero delay-3">
