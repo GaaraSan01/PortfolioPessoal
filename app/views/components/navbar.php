@@ -37,6 +37,6 @@
     </ul>
    <!-- <div class="offcanvas-footer">
         <p>Vamos criar algo incrível.</p>
-        <a href="mailto:<?= EMAIL_TO ?>" class="offcanvas-email"><?= EMAIL_TO ?></a>
+        <a href="mailto:<?= View::escape(EMAIL_TO) ?>" class="offcanvas-email"><?= View::escape(EMAIL_TO) ?></a>
     </div>-->
 </aside>

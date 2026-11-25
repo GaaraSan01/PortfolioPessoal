@@ -5,7 +5,7 @@
             <h2>TEM UM PROJETO?<br>VAMOS <span class="stroke-text">CONVERSAR</span>.</h2>
             <p>Preencha os campos ao lado para iniciarmos o desenvolvimento da sua ideia.</p>
             <div class="contact-info">
-                <p>E-mail: <?= EMAIL_TO ?></p>
+                <?php if (EMAIL_TO): ?><p>E-mail: <a href="mailto:<?= View::escape(EMAIL_TO) ?>"><?= View::escape(EMAIL_TO) ?></a></p><?php endif; ?>
                 <p>Loc: São José dos Pinhais, PR</p>
             </div>
         </div>

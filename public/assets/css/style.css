@@ -298,6 +298,37 @@ body.loaded .preloader {
     font-size: 1.1rem;
 }
 
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--accent-strong);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #C23400;
+}
+
+.hero-actions .btn-primary,
+.hero-actions .btn-outline {
+    padding: 0.9rem 1.6rem;
+}
+
+/* Miniatura só no mobile; no desktop a imagem aparece no hover (preview flutuante) */
+.project-thumb {
+    display: none;
+}
+
 .hero-image-container {
     height: 60vh;
     border-radius: 8px;
@@ -314,25 +345,6 @@ body.loaded .preloader {
 
 .hero-img:hover {
     filter: grayscale(0%);
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 3rem;
-    left: 5%;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    color: var(--text-muted);
-    transform: rotate(-90deg);
-    transform-origin: left;
-    font-size: 0.8rem;
-}
-
-.scroll-indicator .line {
-    width: 40px;
-    height: 1px;
-    background: var(--border);
 }
 
 /* ============ MARQUEE ============ */
@@ -469,7 +481,7 @@ body.loaded .preloader {
 
 .about-text h2 {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 8vw, 3rem);
     line-height: 1.1;
     margin-bottom: 2rem;
 }
@@ -658,6 +670,26 @@ body.loaded .preloader {
     .about-grid,
     .contact-container {
         grid-template-columns: 1fr;
+    }
+
+    .project-item {
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
+    }
+
+    /* Título na linha inteira; categoria e seta dividem a linha de baixo */
+    .project-details {
+        flex: 1 1 100%;
+    }
+
+    .project-thumb {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 1.5rem;
+        background: var(--bg-secondary);
     }
 }
 
