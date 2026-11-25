@@ -15,6 +15,9 @@
     RewriteRule ^sitemap\.xml$ sitemap.php [L]
     RewriteRule ^robots\.txt$ robots.php [L]
 
+    # Log do formulário de contato contém dados pessoais (403)
+    RewriteRule ^contact-log\.txt$ - [F,L]
+
     # ============================================
     # PERMITIR ACESSO A ARQUIVOS PÚBLICOS
     # ============================================
@@ -107,7 +110,7 @@ Options +FollowSymLinks
 </FilesMatch>
 
 # Proteger arquivos sensíveis por extensão
-<FilesMatch "\.(ini|log|md)$">
+<FilesMatch "\.(ini|log|md|sqlite|sqlite-journal|sql)$">
     Order allow,deny
     Deny from all
 </FilesMatch>
@@ -116,7 +119,7 @@ Options +FollowSymLinks
 <IfModule mod_rewrite.c>
     RewriteEngine On
     # Bloquear acesso direto a /app, /core, /config
-    RewriteRule ^(app|core|config|logs)/ - [F,L]
+    RewriteRule ^(app|core|config|logs|sql)/ - [F,L]
 </IfModule>
 
 # Headers de segurança

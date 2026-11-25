@@ -48,12 +48,15 @@ class ContactModel extends Model
         $subject = '[' . APP_NAME . '] Nova mensagem de contato';
         
         $htmlBody = $this->getEmailTemplate($data);
-        
+
+        // CR/LF no nome permitiria injetar cabeçalhos (Bcc:, etc.) no mail()
+        $replyName = preg_replace('/[\r\n\x00-\x1F]+/', ' ', $data['nome']);
+
         $headers = [
             'MIME-Version: 1.0',
             'Content-Type: text/html; charset=UTF-8',
             'From: ' . EMAIL_FROM_NAME . ' <' . EMAIL_FROM . '>',
-            'Reply-To: ' . $data['nome'] . ' <' . $data['email'] . '>',
+            'Reply-To: ' . $replyName . ' <' . $data['email'] . '>',
             'X-Mailer: PHP/' . phpversion(),
             'X-Priority: 1',
             'Importance: High'
