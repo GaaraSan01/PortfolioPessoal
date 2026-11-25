@@ -91,7 +91,7 @@ include __DIR__ . '/partials/header.php';
                     <tr>
                         <td><?= htmlspecialchars($p['title']) ?></td>
                         <td><?= htmlspecialchars($p['category'] ?? '—') ?></td>
-                        <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= $p['status'] ?? 'draft' ?></span></td>
+                        <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= htmlspecialchars($p['status'] ?? 'draft') ?></span></td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -109,7 +109,7 @@ include __DIR__ . '/partials/header.php';
                     <tr>
                         <td><?= htmlspecialchars($p['title']) ?></td>
                         <td><?= htmlspecialchars($p['category'] ?? '—') ?></td>
-                        <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= $p['status'] ?? 'draft' ?></span></td>
+                        <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= htmlspecialchars($p['status'] ?? 'draft') ?></span></td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>

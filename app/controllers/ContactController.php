@@ -13,6 +13,7 @@ class ContactController extends Controller
     {
         $data = [
             'title' => 'Contato',
+            'seoKey' => 'page.contact',
             'metaDescription' => 'Entre em contato com Vinicius Henrique para novos projetos ou parcerias.'
         ];
 
@@ -72,7 +73,7 @@ class ContactController extends Controller
 
                 $this->json([
                     'success' => true,
-                    'message' => 'Mensagem enviada com sucesso! Retornaremos em breve.'
+                    'message' => 'Mensagem enviada! Vou responder no seu e-mail em breve.'
                 ]);
             } else {
                 throw new Exception('Falha ao enviar o email');

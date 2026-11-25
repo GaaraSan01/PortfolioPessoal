@@ -1,17 +1,17 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    # Bloquear acesso direto a arquivos PHP exceto index.php, auth.php e arquivos dos subdiretórios
+    # Bloquear acesso direto a arquivos PHP exceto as páginas do painel
     RewriteCond %{THE_REQUEST} ^.+\.php[\ ?]
     RewriteCond %{REQUEST_URI} !^/admin/index\.php
     RewriteCond %{REQUEST_URI} !^/admin/dashboard\.php
     RewriteCond %{REQUEST_URI} !^/admin/logout\.php
-    RewriteCond %{REQUEST_URI} !^/admin/migrate\.php
     RewriteCond %{REQUEST_URI} !^/admin/projects/
     RewriteCond %{REQUEST_URI} !^/admin/posts/
+    RewriteCond %{REQUEST_URI} !^/admin/seo/
     RewriteRule \.php$ - [F,L]
 </IfModule>
 
-# Deny direct access to sensitive files
+# Bloquear acesso direto a arquivos sensíveis
 <Files "auth.php">
-    Deny from all
+    Require all denied
 </Files>

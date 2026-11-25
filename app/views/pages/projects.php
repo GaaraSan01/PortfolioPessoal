@@ -1,6 +1,6 @@
 <section class="page-hero">
     <div class="container">
-        <span class="section-label reveal-hero">02 // TRABALHOS</span>
+        <span class="section-label reveal-hero">// TRABALHOS</span>
         <h1 class="reveal-hero delay-1">Projetos <span class="stroke-text">Selecionados</span>.</h1>
         <p class="hero-sub reveal-hero delay-2">
             Uma amostra do meu trabalho recente, variando de interfaces experimentais a sistemas complexos de agendamento.
@@ -27,7 +27,7 @@
                     <h3><?= View::escape($project['title']) ?></h3>
                     <p><?= View::escape($project['description']) ?></p>
                     <div class="card-footer">
-                        <span class="view-project">Ver Projeto</span>
+                        <span class="view-project">Ver projeto</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ class ContactModel extends Model
 
         
         if (empty($data['nome'])) {
-            $errors['nome'] = 'Nome é obrigatório';
+            $errors['nome'] = 'Informe seu nome';
         } elseif (!$this->validateName($data['nome'])) {
             $errors['nome'] = 'Nome inválido';
         } elseif (!$this->validateMaxLength($data['nome'], 50)) {
@@ -17,21 +17,21 @@ class ContactModel extends Model
         }
 
         if (empty($data['number'])) {
-            $errors['number'] = 'Numero é obrigatório';
+            $errors['number'] = 'Informe seu WhatsApp ou telefone';
         } elseif (!$this->validateNumber($data['number'])) {
-            $errors['number'] = 'Numero inválido';
+            $errors['number'] = 'Use DDD + número, ex.: (41) 99999-9999';
         }
 
         if (empty($data['email'])) {
-            $errors['email'] = 'E-mail é obrigatório';
+            $errors['email'] = 'Informe seu e-mail';
         } elseif (!$this->validateEmail($data['email'])) {
-            $errors['email'] = 'E-mail inválido';
+            $errors['email'] = 'Confira o e-mail, ex.: nome@empresa.com';
         }
 
         if (empty($data['mensagem'])) {
-            $errors['mensagem'] = 'Mensagem é obrigatória';
+            $errors['mensagem'] = 'Escreva sua mensagem';
         } elseif (!$this->validateMinLength($data['mensagem'], 10)) {
-            $errors['mensagem'] = 'Mensagem muito curta (mínimo 10 caracteres)';
+            $errors['mensagem'] = 'Escreva pelo menos 10 caracteres';
         } elseif (!$this->validateMaxLength($data['mensagem'], 1000)) {
             $errors['mensagem'] = 'Mensagem ultrapassa o limite máximo de 1000 caracteres';
         }

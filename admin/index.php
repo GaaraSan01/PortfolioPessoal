@@ -10,7 +10,8 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = trim($_POST['username'] ?? '');
-    $pass = trim($_POST['password'] ?? '');
+    $pass = $_POST['password'] ?? '';
+    $ip   = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 
     try {
         $pdo = Database::getInstance();
@@ -18,7 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['username' => $user]);
         $dbUser = $stmt->fetch();
 
-        if ($dbUser && password_verify($pass, $dbUser['password_hash'])) {
+        if (login_throttled($pdo, $ip)) {
+            $error = 'Muitas tentativas. Aguarde 15 minutos.';
+        } elseif ($dbUser && password_verify($pass, $dbUser['password_hash'])) {
+            login_succeeded($pdo, $ip);
+            session_regenerate_id(true);
             // Rehash the password if it needs to be updated (e.g. options changed)
             if (password_needs_rehash($dbUser['password_hash'], PASSWORD_ARGON2ID)) {
                 $newHash = password_hash($pass, PASSWORD_ARGON2ID);
@@ -30,9 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['admin_user']      = $dbUser['username'];
             $_SESSION['admin_user_id']   = $dbUser['id'];
             $_SESSION['admin_csrf']      = bin2hex(random_bytes(32));
+            $_SESSION['admin_last_seen'] = time();
             header('Location: ' . BASE_URL . '/admin/dashboard.php');
             exit;
         } else {
+            login_failed($pdo, $ip);
             $error = 'Usuário ou senha incorretos.';
         }
     } catch (Exception $e) {

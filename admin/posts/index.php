@@ -20,7 +20,7 @@ include dirname(__DIR__) . '/partials/header.php';
         </div>
 
         <?php if ($flash): ?>
-        <div class="admin-alert <?= $flash['type'] ?>"><?= htmlspecialchars($flash['msg']) ?></div>
+        <div class="admin-alert <?= htmlspecialchars($flash['type']) ?>"><?= htmlspecialchars($flash['msg']) ?></div>
         <?php endif; ?>
 
         <?php if (empty($posts)): ?>
@@ -40,7 +40,7 @@ include dirname(__DIR__) . '/partials/header.php';
                 <td><?= htmlspecialchars($p['category'] ?? '—') ?></td>
                 <td><?= htmlspecialchars($p['date'] ?? '—') ?></td>
                 <td><?= (int)($p['reading_time'] ?? 0) ?> min</td>
-                <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= $p['status'] ?? 'draft' ?></span></td>
+                <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= htmlspecialchars($p['status'] ?? 'draft') ?></span></td>
                 <td class="actions-cell">
                     <a href="<?= admin_url('posts/edit.php?id=' . urlencode($p['id'])) ?>" class="btn-sm">Editar</a>
                     <form method="POST" action="<?= admin_url('posts/delete.php') ?>" onsubmit="return confirm('Excluir este post?')">

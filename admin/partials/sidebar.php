@@ -14,6 +14,15 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
             Blog Posts
         </a>
+        <div class="nav-section-label">SEO</div>
+        <a href="<?= admin_url('seo/index.php') ?>" class="nav-item <?= strpos($_SERVER['PHP_SELF'], '/seo/index.php') !== false ? 'active' : '' ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+            Diagnóstico
+        </a>
+        <a href="<?= admin_url('seo/settings.php') ?>" class="nav-item <?= strpos($_SERVER['PHP_SELF'], '/seo/settings.php') !== false ? 'active' : '' ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="4" x2="20" y1="21" y2="21"/><line x1="4" x2="20" y1="14" y2="14"/><line x1="4" x2="20" y1="7" y2="7"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="14" r="2"/></svg>
+            Configurações
+        </a>
         <div class="nav-section-label">Site</div>
         <a href="<?= BASE_URL . "/" ?>" target="_blank" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>

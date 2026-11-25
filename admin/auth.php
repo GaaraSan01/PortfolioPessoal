@@ -6,14 +6,109 @@ define('ROOT', dirname(__DIR__));
 // Carregar config global do site para usar constantes (BASE_URL, etc.)
 require_once ROOT . '/config/config.php';
 require_once ROOT . '/core/Database.php';
+require_once ROOT . '/core/Seo.php';
 
 // Credenciais agora são validadas através do banco de dados (tabela users)
 
+const ADMIN_IDLE_TIMEOUT = 7200; // 2h sem atividade encerra a sessão
+const LOGIN_MAX_ATTEMPTS = 5;
+const LOGIN_WINDOW = 900; // 15 min
+
 function admin_auth_check() {
-    if (empty($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    $expired = isset($_SESSION['admin_last_seen']) && time() - $_SESSION['admin_last_seen'] > ADMIN_IDLE_TIMEOUT;
+    if ($expired) {
+        session_destroy();
+    }
+    if ($expired || empty($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
         header('Location: ' . BASE_URL . '/admin/index.php');
         exit;
     }
+    $_SESSION['admin_last_seen'] = time();
+}
+
+// Tentativas ficam no banco: um limite na sessão some ao descartar o cookie.
+function login_throttled(PDO $pdo, string $ip): bool {
+    $pdo->exec("CREATE TABLE IF NOT EXISTS login_attempts (ip VARCHAR(64) NOT NULL, attempted_at INTEGER NOT NULL)");
+    $pdo->prepare("DELETE FROM login_attempts WHERE attempted_at < ?")->execute([time() - LOGIN_WINDOW]);
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM login_attempts WHERE ip = ?");
+    $stmt->execute([$ip]);
+    return (int)$stmt->fetchColumn() >= LOGIN_MAX_ATTEMPTS;
+}
+
+function login_failed(PDO $pdo, string $ip): void {
+    $pdo->prepare("INSERT INTO login_attempts (ip, attempted_at) VALUES (?, ?)")->execute([$ip, time()]);
+}
+
+function login_succeeded(PDO $pdo, string $ip): void {
+    $pdo->prepare("DELETE FROM login_attempts WHERE ip = ?")->execute([$ip]);
+}
+
+function unique_slug(PDO $pdo, string $table, string $base, ?int $ignoreId = null): string {
+    if (!in_array($table, ['projects', 'posts'], true)) {
+        throw new InvalidArgumentException('Tabela inválida');
+    }
+    $base = $base !== '' ? $base : 'item';
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM $table WHERE slug = ? AND id != ?");
+    for ($slug = $base, $n = 2; ; $slug = "$base-" . $n++) {
+        $stmt->execute([$slug, $ignoreId ?? 0]);
+        if ((int)$stmt->fetchColumn() === 0) return $slug;
+    }
+}
+
+// Apaga só arquivos locais dentro de UPLOADS_PATH que nenhum projeto ainda usa; URLs externas são ignoradas.
+function delete_upload(PDO $pdo, ?string $image): void {
+    if (!$image || filter_var($image, FILTER_VALIDATE_URL)) return;
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM projects WHERE image = ?");
+    $stmt->execute([$image]);
+    if ((int)$stmt->fetchColumn() > 0) return;
+    $file = UPLOADS_PATH . '/' . basename($image);
+    if (is_file($file)) unlink($file);
+}
+
+/** Move o upload do campo $field para UPLOADS_PATH; retorna o nome do arquivo ou null (sem arquivo / erro em $errors). */
+function upload_image(string $field, string $prefix, array &$errors): ?string {
+    $file = $_FILES[$field] ?? null;
+    if (!$file || $file['error'] === UPLOAD_ERR_NO_FILE) return null;
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $errors[] = 'Erro ao fazer upload da imagem.';
+        return null;
+    }
+    $filename = uniqid($prefix) . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', basename($file['name']));
+    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif'], true) || strpos($mime, 'image/') !== 0) {
+        $errors[] = 'Apenas arquivos de imagem são permitidos (JPG, PNG, GIF, WEBP, AVIF).';
+        return null;
+    }
+    if (!is_dir(UPLOADS_PATH)) mkdir(UPLOADS_PATH, 0755, true);
+    if (!move_uploaded_file($file['tmp_name'], UPLOADS_PATH . '/' . $filename)) {
+        $errors[] = 'Erro ao fazer upload da imagem.';
+        return null;
+    }
+    return $filename;
+}
+
+/** Lê os campos de SEO de um post/projeto do formulário. */
+function seo_fields_from_post(string $prefix): array {
+    return [
+        "$prefix.title"       => trim($_POST['seo_title'] ?? ''),
+        "$prefix.description" => trim($_POST['seo_description'] ?? ''),
+        "$prefix.noindex"     => !empty($_POST['seo_noindex']) ? '1' : '',
+    ];
+}
+
+function format_post_date(string $iso): ?string {
+    $d = DateTime::createFromFormat('!Y-m-d', $iso);
+    if (!$d || $d->format('Y-m-d') !== $iso) return null;
+    $months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    return $d->format('d') . ' ' . $months[(int)$d->format('n') - 1] . ', ' . $d->format('Y');
+}
+
+function valid_project_url(string $url): bool {
+    return $url === '' || (filter_var($url, FILTER_VALIDATE_URL) && in_array(strtolower(parse_url($url, PHP_URL_SCHEME)), ['http', 'https'], true));
 }
 
 function admin_url($path = '') {

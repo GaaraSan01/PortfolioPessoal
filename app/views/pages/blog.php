@@ -1,6 +1,6 @@
 <section class="page-hero">
     <div class="container">
-        <span class="section-label reveal-hero">03 // INSIGHTS</span>
+        <span class="section-label reveal-hero">// INSIGHTS</span>
         <h1 class="reveal-hero delay-1">Pensamentos & <span class="highlight">Código</span>.</h1>
         <p class="hero-sub reveal-hero delay-2">
             Explorando as fronteiras entre design, tecnologia e produtividade.
@@ -50,8 +50,13 @@
             <div class="blog-empty-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
             </div>
+            <?php if (!empty($searchQuery)): ?>
             <h3>Nenhum artigo encontrado</h3>
-            <p>Tente ajustar os termos de pesquisa ou <a href="<?= url('blog') ?>">ver todos os artigos</a>.</p>
+            <p>Tente outros termos ou <a href="<?= url('blog') ?>">veja todos os artigos</a>.</p>
+            <?php else: ?>
+            <h3>Nenhum artigo publicado ainda</h3>
+            <p>Os primeiros textos estão a caminho. Enquanto isso, <a href="<?= url('projects') ?>">veja meus projetos</a>.</p>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
 
@@ -70,7 +75,7 @@
                         <h2><?= View::escape($post['title']) ?></h2>
                         <p><?= View::escape($post['excerpt']) ?></p>
                         <div class="read-more">
-                            <span>Ler Artigo</span> 
+                            <span>Ler artigo</span> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </div>
                     </a>

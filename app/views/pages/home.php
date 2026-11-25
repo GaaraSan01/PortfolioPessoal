@@ -13,24 +13,24 @@
             <p class="hero-sub reveal-hero delay-2">
                 Construindo interfaces digitais de alta performance com foco em experiência do usuário e arquitetura escalável.
             </p>
+            <div class="hero-actions reveal-hero delay-2">
+                <a href="#projetos" class="btn-primary hover-trigger">Ver projetos</a>
+                <a href="<?= url('contact') ?>" class="btn-outline hover-trigger">Fale comigo</a>
+            </div>
         </div>
         <div class="hero-image-container reveal-hero delay-3">
-            <img src="<?= uploads('/img-hero.avif') ?>" alt="Setup" class="hero-img">
+            <img src="<?= uploads('/img-hero.avif') ?>" alt="" class="hero-img">
         </div>
     </div>
-    <a href="#projetos" class="scroll-indicator hover-trigger reveal-hero delay-3">
-        <span class="scroll-text">SCROLL</span>
-        <div class="line"></div>
-    </a>
 </header>
 
 <!-- MARQUEE -->
 <div class="marquee">
     <div class="track">
             <div class="content">
-                &nbsp;FULL STACK / PYTHON / VUEJS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
-                &nbsp;FULL STACK / PYTHON / VUEJS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
-                &nbsp;FULL STACK / PYTHON / VUEJS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
+                &nbsp;FULL STACK / PYTHON / VUE.JS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
+                &nbsp;FULL STACK / PYTHON / VUE.JS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
+                &nbsp;FULL STACK / PYTHON / VUE.JS / UI DESIGN / WORDPRESS / PERFORMANCE /&nbsp;FULL STACK / PHP / REACT / UI DESIGN / SEO / PERFORMANCE /
             </div>
     </div>
 </div>
@@ -39,7 +39,7 @@
 <section id="projetos" class="projects-section">
     <div class="container">
         <div class="section-header reveal">
-            <span class="section-label">01 // TRABALHOS</span>
+            <span class="section-label">// TRABALHOS</span>
             <h2 class="section-title">Projetos Selecionados<span class="dot">.</span></h2>
         </div>
         
@@ -50,6 +50,7 @@
         <div class="project-list">
             <?php foreach ($projects as $project): ?>
             <a href="<?= View::escape($project['url']) ?>" class="project-item hover-trigger reveal" data-image="<?= View::escape($project['image']) ?>">
+                <img class="project-thumb" src="<?= View::escape($project['image']) ?>" alt="" loading="lazy">
                 <div class="project-details">
                     <span class="project-num"><?= View::escape($project['num']) ?></span>
                     <h3><?= View::escape($project['title']) ?></h3>
@@ -61,6 +62,7 @@
             </a>
             <?php endforeach; ?>
         </div>
+        <a href="<?= url('projects') ?>" class="btn-outline hover-trigger projects-all-link">Ver todos os projetos</a>
     </div>
 </section>
 
@@ -68,7 +70,7 @@
     <div class="container">
         <div class="about-grid">
             <div class="about-text reveal">
-                <span class="section-label">02 // EXPERTISE</span>
+                <span class="section-label">// EXPERTISE</span>
                 <h2>Estética encontra <br><span class="highlight">Funcionalidade.</span></h2>
                 <p>Não sou apenas um programador, sou um parceiro estratégico. Com foco na intersecção entre design visual e arquitetura de software, crio soluções que não apenas parecem boas, mas escalam com seu negócio.</p>
                     
@@ -79,7 +81,7 @@
             <div class="skills-wrapper reveal">
                 <div class="skill-card">
                     <h3>Frontend</h3>
-                    <p>React, Next.js, Tailwind, VueJs, NuxtJs</p>
+                    <p>React, Next.js, Tailwind, Vue.js, Nuxt</p>
                 </div>
                 <div class="skill-card">
                     <h3>Backend</h3>

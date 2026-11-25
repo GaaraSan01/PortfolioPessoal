@@ -7,11 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewEl = document.querySelector('.preview-content');
 
     function renderPreview() {
-        if (!mdInput || !previewEl || typeof marked === 'undefined') return;
-        let html = marked.parse(mdInput.value || '');
-        // Sanitização básica para o preview (remover <script>)
-        html = html.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gim, "<strong>[Script Removido por Segurança]</strong>");
-        previewEl.innerHTML = html;
+        if (!mdInput || !previewEl || typeof marked === 'undefined' || typeof DOMPurify === 'undefined') return;
+        previewEl.innerHTML = DOMPurify.sanitize(marked.parse(mdInput.value || ''));
     }
 
     tabBtns.forEach(btn => {
@@ -56,6 +53,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     
+    // Contador de caracteres: <input data-counter="160">
+    document.querySelectorAll('[data-counter]').forEach(field => {
+        const max = Number(field.dataset.counter);
+        const counter = document.createElement('small');
+        counter.className = 'char-counter';
+        counter.setAttribute('aria-live', 'polite');
+        field.insertAdjacentElement('afterend', counter);
+        const update = () => {
+            const len = field.value.length;
+            counter.textContent = `${len} / ${max} caracteres` + (len > max ? ' (será cortado no Google)' : '');
+            counter.classList.toggle('is-over', len > max);
+        };
+        field.addEventListener('input', update);
+        update();
+    });
+
+    // Prévia no Google: usa o campo de SEO ou, vazio, o campo de conteúdo equivalente
+    document.querySelectorAll('.serp-preview').forEach(box => {
+        const pick = (sel) => sel ? document.querySelector(sel) : null;
+        const title = pick(box.dataset.title), titleFb = pick(box.dataset.titleFallback);
+        const desc = pick(box.dataset.desc), descFb = pick(box.dataset.descFallback);
+        const cut = (s, n) => s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s;
+        const update = () => {
+            // Igual ao Seo::meta: título próprio substitui "Conteúdo | Seção"; o nome do site vai sempre no fim
+            const t = (title?.value.trim() || (titleFb?.value.trim() || 'Sem título') + (box.dataset.titleSuffix || '')) + (box.dataset.siteSuffix || '');
+            const d = desc?.value.trim() || descFb?.value.trim() || 'Sem descrição: o Google vai escolher um trecho da página.';
+            box.querySelector('.serp-title').textContent = cut(t, 60);
+            box.querySelector('.serp-desc').textContent = cut(d, 160);
+        };
+        [title, titleFb, desc, descFb].forEach(el => el?.addEventListener('input', update));
+        update();
+    });
+
     document.querySelectorAll('form[data-confirm]').forEach(form => {
         form.addEventListener('submit', (e) => {
             if (!confirm(form.dataset.confirm)) {
