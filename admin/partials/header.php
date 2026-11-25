@@ -16,7 +16,7 @@ $body_class = $body_class ?? 'admin-body';
     <link rel="apple-touch-icon" sizes="180x180" href="<?= uploads('favicon/apple-touch-icon.png') ?>">
     <link rel="manifest" href="<?= uploads('favicon/site.webmanifest') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/admin/assets/css/admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/admin/assets/css/admin.css?v=<?= filemtime(ADMIN_PATH . '/assets/css/admin.css') ?>">
     <?php if (!empty($extra_css)): ?>
         <style><?= $extra_css ?></style>
     <?php endif; ?>

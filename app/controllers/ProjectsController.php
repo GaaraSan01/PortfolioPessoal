@@ -11,15 +11,8 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        $allProjects = $this->getProjects();
-        $page = max(1, isset($_GET['page']) ? (int)$_GET['page'] : 1);
-        $perPage = 6; // Quantidade de projetos por página
-        $totalItems = count($allProjects);
-        $totalPages = max(1, ceil($totalItems / $perPage));
-        $page = min($page, $totalPages);
-        
-        $offset = ($page - 1) * $perPage;
-        $projectsPaginated = array_slice($allProjects, $offset, $perPage);
+        [$rows, $page, $totalPages] = $this->paginate('projects', "status = 'published'", [], 'created_at DESC', 6);
+        $projectsPaginated = array_map([$this, 'withImageUrl'], $rows);
 
         $data = [
             'title'           => 'Projetos',
@@ -39,7 +32,7 @@ class ProjectsController extends Controller
             return;
         }
 
-        $project = $this->getProjectBySlug($slug);
+        $project = $this->findPublishedBySlug('projects', $slug);
 
         if (!$project) {
             http_response_code(404);
@@ -47,8 +40,7 @@ class ProjectsController extends Controller
             return;
         }
 
-        $img = $project['image'] ?? '';
-        $project['image_url'] = (filter_var($img, FILTER_VALIDATE_URL)) ? $img : uploads('/' . ltrim($img, '/'));
+        $project = $this->withImageUrl($project);
 
         $data = [
             'title'           => $project['title'] . ' | Projetos',
@@ -61,48 +53,11 @@ class ProjectsController extends Controller
         $this->view('project-single', $data);
     }
 
-    public function getProjects()
+    private function withImageUrl(array $p)
     {
-        $projects = $this->fetchRawProjects();
-        $published = array_values(array_filter($projects, fn($p) => ($p['status'] ?? 'published') === 'published'));
-        
-        return array_map(function($p) {
-            $img = $p['image'] ?? '';
-            $p['image_url'] = (filter_var($img, FILTER_VALIDATE_URL)) ? $img : uploads('/' . ltrim($img, '/'));
-            return $p;
-        }, $published);
-    }
-
-    private static $cachedProjects = null;
-
-    private function fetchRawProjects()
-    {
-        if (self::$cachedProjects !== null) {
-            return self::$cachedProjects;
-        }
-        try {
-            require_once ROOT . '/core/Database.php';
-            $pdo = Database::getInstance();
-            $stmt = $pdo->query("SELECT * FROM projects ORDER BY created_at DESC");
-            $projects = $stmt->fetchAll();
-            foreach ($projects as &$p) {
-                $p['technologies'] = json_decode($p['technologies'] ?? '[]', true) ?: [];
-            }
-            self::$cachedProjects = $projects;
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            self::$cachedProjects = [];
-        }
-        
-        return self::$cachedProjects;
-    }
-
-    private function getProjectBySlug($slug)
-    {
-        $projects = $this->fetchRawProjects();
-        foreach ($projects as $project) {
-            if ($project['slug'] === $slug) return $project;
-        }
-        return null;
+        $img = $p['image'] ?? '';
+        $p['image_url'] = filter_var($img, FILTER_VALIDATE_URL) ? $img : uploads('/' . ltrim($img, '/'));
+        $p['technologies'] = json_decode($p['technologies'] ?? '[]', true) ?: [];
+        return $p;
     }
 }

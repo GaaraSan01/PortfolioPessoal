@@ -119,7 +119,7 @@ Options +FollowSymLinks
 <IfModule mod_rewrite.c>
     RewriteEngine On
     # Bloquear acesso direto a /app, /core, /config
-    RewriteRule ^(app|core|config|logs|sql)/ - [F,L]
+    RewriteRule ^(app|core|config|logs|sql|dev|\.claude|\.github)/ - [F,L]
 </IfModule>
 
 # Headers de segurança
@@ -136,6 +136,10 @@ Options +FollowSymLinks
     # Referrer Policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     
+    # Content Security Policy: scripts só do próprio site e do jsDelivr (marked/DOMPurify no admin).
+    # Estilos inline seguem liberados (atributos style= nas views); img-src https: cobre imagens externas de projetos.
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
     # Permissions Policy
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
     

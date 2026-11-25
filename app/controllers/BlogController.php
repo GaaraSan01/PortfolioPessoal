@@ -11,36 +11,15 @@ class BlogController extends Controller
 
     public function index()
     {
-        $allPosts = $this->getPosts();
-        
-        // Search filtering
-        $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
+        $searchQuery = trim((string)($_GET['q'] ?? ''));
+        $where = "status = 'published'";
+        $params = [];
         if ($searchQuery !== '') {
-            $search = mb_strtolower($searchQuery, 'UTF-8');
-            $allPosts = array_values(array_filter($allPosts, function($post) use ($search) {
-                $fields = [
-                    mb_strtolower($post['title'] ?? '', 'UTF-8'),
-                    mb_strtolower($post['excerpt'] ?? '', 'UTF-8'),
-                    mb_strtolower($post['category'] ?? '', 'UTF-8'),
-                    mb_strtolower($post['content'] ?? '', 'UTF-8'),
-                ];
-                foreach ($fields as $field) {
-                    if (mb_strpos($field, $search) !== false) {
-                        return true;
-                    }
-                }
-                return false;
-            }));
+            // shortcut: no SQLite o LIKE só ignora maiúsculas em ASCII ("Ç" ≠ "ç"); no MySQL utf8mb4 ignora tudo
+            $where .= " AND (title LIKE ? OR excerpt LIKE ? OR category LIKE ? OR content LIKE ?)";
+            $params = array_fill(0, 4, '%' . $searchQuery . '%');
         }
-
-        $page = max(1, isset($_GET['page']) ? (int)$_GET['page'] : 1);
-        $perPage = 6; // Quantidade de posts por página
-        $totalItems = count($allPosts);
-        $totalPages = max(1, ceil($totalItems / $perPage));
-        $page = min($page, $totalPages);
-        
-        $offset = ($page - 1) * $perPage;
-        $postsPaginated = array_slice($allPosts, $offset, $perPage);
+        [$postsPaginated, $page, $totalPages] = $this->paginate('posts', $where, $params, 'date_iso DESC', 6);
 
         $data = [
             'title'           => $searchQuery ? "Pesquisa: {$searchQuery} | Blog" : 'Blog',
@@ -63,7 +42,7 @@ class BlogController extends Controller
             return;
         }
 
-        $post = $this->getPostBySlug($slug);
+        $post = $this->findPublishedBySlug('posts', $slug);
 
         if (!$post) {
             http_response_code(404);
@@ -110,41 +89,5 @@ class BlogController extends Controller
             return "<h{$m[1]} id=\"$id\">{$m[2]}</h{$m[1]}>";
         }, $html);
         return [$html, $toc];
-    }
-
-    public function getPosts()
-    {
-        $posts = $this->fetchRawPosts();
-        $posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 'published');
-        usort($posts, fn($a, $b) => strcmp($b['date_iso'] ?? '', $a['date_iso'] ?? ''));
-        return array_values($posts);
-    }
-
-    private static $cachedPosts = null;
-
-    private function fetchRawPosts()
-    {
-        if (self::$cachedPosts !== null) {
-            return self::$cachedPosts;
-        }
-        try {
-            require_once ROOT . '/core/Database.php';
-            $pdo = Database::getInstance();
-            $stmt = $pdo->query("SELECT * FROM posts ORDER BY date_iso DESC");
-            self::$cachedPosts = $stmt->fetchAll();
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            self::$cachedPosts = [];
-        }
-        return self::$cachedPosts;
-    }
-
-    private function getPostBySlug($slug)
-    {
-        $posts = $this->fetchRawPosts();
-        foreach ($posts as $post) {
-            if ($post['slug'] === $slug) return $post;
-        }
-        return null;
     }
 }
