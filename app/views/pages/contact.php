@@ -1,6 +1,6 @@
 <section class="page-hero contact-hero">
     <div class="container">
-        <span class="section-label reveal-hero">04 // CONTATO</span>
+        <span class="section-label reveal-hero">// CONTATO</span>
         <h1 class="reveal-hero delay-1">
             Vamos iniciar algo<br><span class="stroke-text">grande</span>?
         </h1>

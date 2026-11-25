@@ -1,6 +1,6 @@
 <section class="page-hero">
     <div class="container">
-        <span class="section-label reveal-hero">01 // TRAJETÓRIA</span>
+        <span class="section-label reveal-hero">// TRAJETÓRIA</span>
         <h1 class="reveal-hero delay-1">Criando o <span class="highlight">Incomum</span>.</h1>
         <p class="hero-sub reveal-hero delay-2">
             Sou Vinicius Henrique, desenvolvedor full-stack e designer focado em construir produtos digitais que resolvem problemas reais com elegância técnica.
@@ -217,7 +217,7 @@
 <section class="timeline-section">
     <div class="container">
         <div class="section-header reveal">
-            <span class="section-label">02 // JORNADA</span>
+            <span class="section-label">// JORNADA</span>
             <h2 class="section-title">Linha do Tempo<span class="dot">.</span></h2>
         </div>
 

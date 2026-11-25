@@ -1,7 +1,7 @@
 <footer id="contato" class="footer-section">
     <div class="container footer-grid">
         <div class="cta-col reveal">
-            <span class="section-label">03 // CONTATO</span>
+            <span class="section-label">// CONTATO</span>
             <h2>TEM UM PROJETO?<br>VAMOS <span class="stroke-text">CONVERSAR</span>.</h2>
             <p>Preencha os campos ao lado para iniciarmos o desenvolvimento da sua ideia.</p>
             <div class="contact-info">

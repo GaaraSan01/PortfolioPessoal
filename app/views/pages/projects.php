@@ -1,6 +1,6 @@
 <section class="page-hero">
     <div class="container">
-        <span class="section-label reveal-hero">02 // TRABALHOS</span>
+        <span class="section-label reveal-hero">// TRABALHOS</span>
         <h1 class="reveal-hero delay-1">Projetos <span class="stroke-text">Selecionados</span>.</h1>
         <p class="hero-sub reveal-hero delay-2">
             Uma amostra do meu trabalho recente, variando de interfaces experimentais a sistemas complexos de agendamento.

@@ -1,6 +1,6 @@
 <section class="page-hero">
     <div class="container">
-        <span class="section-label reveal-hero">03 // INSIGHTS</span>
+        <span class="section-label reveal-hero">// INSIGHTS</span>
         <h1 class="reveal-hero delay-1">Pensamentos & <span class="highlight">Código</span>.</h1>
         <p class="hero-sub reveal-hero delay-2">
             Explorando as fronteiras entre design, tecnologia e produtividade.

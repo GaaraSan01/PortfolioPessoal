@@ -39,7 +39,7 @@
 <section id="projetos" class="projects-section">
     <div class="container">
         <div class="section-header reveal">
-            <span class="section-label">01 // TRABALHOS</span>
+            <span class="section-label">// TRABALHOS</span>
             <h2 class="section-title">Projetos Selecionados<span class="dot">.</span></h2>
         </div>
         
@@ -62,6 +62,7 @@
             </a>
             <?php endforeach; ?>
         </div>
+        <a href="<?= url('projects') ?>" class="btn-outline hover-trigger projects-all-link">Ver todos os projetos</a>
     </div>
 </section>
 
@@ -69,7 +70,7 @@
     <div class="container">
         <div class="about-grid">
             <div class="about-text reveal">
-                <span class="section-label">02 // EXPERTISE</span>
+                <span class="section-label">// EXPERTISE</span>
                 <h2>Estética encontra <br><span class="highlight">Funcionalidade.</span></h2>
                 <p>Não sou apenas um programador, sou um parceiro estratégico. Com foco na intersecção entre design visual e arquitetura de software, crio soluções que não apenas parecem boas, mas escalam com seu negócio.</p>
                     

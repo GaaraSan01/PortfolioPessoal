@@ -403,8 +403,10 @@ body.loaded .preloader {
 }
 
 .project-item {
-    display: flex;
-    justify-content: space-between;
+    /* Grid fixo: a categoria fica alinhada em coluna, independente do título */
+    display: grid;
+    grid-template-columns: 1fr 220px auto;
+    gap: 2rem;
     align-items: center;
     padding: 3rem 1rem;
     border-bottom: 1px solid var(--border);
@@ -438,15 +440,20 @@ body.loaded .preloader {
     text-transform: uppercase;
 }
 
+.projects-all-link {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.9rem 1.6rem;
+}
+
 .arrow-btn {
     font-size: 1.5rem;
-    transform: rotate(-45deg);
     transition: 0.3s;
 }
 
 .project-item:hover .arrow-btn {
     color: var(--accent);
-    transform: rotate(0deg);
+    transform: translate(4px, -4px);
 }
 
 .project-preview-wrapper {
@@ -673,6 +680,7 @@ body.loaded .preloader {
     }
 
     .project-item {
+        display: flex;
         flex-wrap: wrap;
         row-gap: 0.75rem;
     }
@@ -1473,7 +1481,7 @@ body.loaded .preloader {
 
 .blog-link h2 {
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.2;
     margin-bottom: 1rem;
     color: #fff;
@@ -2009,10 +2017,6 @@ body.loaded .preloader {
 
     .page-hero h1 {
         font-size: 3rem;
-    }
-
-    .blog-card h2 {
-        font-size: 1.8rem;
     }
 
     .blog-search {
