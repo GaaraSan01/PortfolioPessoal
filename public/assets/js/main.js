@@ -10,8 +10,7 @@ function finishLoading() {
     }
 }
 
-window.addEventListener('load', finishLoading);
-setTimeout(finishLoading, 3000); // Fallback
+document.addEventListener('DOMContentLoaded', finishLoading);
 
 // --- 1.5. OFFCANVAS MENU ---
 const hamburgerBtn = document.querySelector('.hamburger-btn');
@@ -42,7 +41,7 @@ if (hamburgerBtn && closeMenuBtn && offcanvasMenu && menuOverlay) {
 const cursorDot = document.querySelector('[data-cursor-dot]');
 const cursorOutline = document.querySelector('[data-cursor-outline]');
 const hoverTriggers = document.querySelectorAll('.hover-trigger');
-const isDesktop = window.matchMedia("(min-width: 969px)").matches;
+const isDesktop = window.matchMedia("(min-width: 968px) and (hover: hover) and (pointer: fine)").matches;
 
 if (isDesktop && cursorDot && cursorOutline) {
     window.addEventListener('mousemove', (e) => {

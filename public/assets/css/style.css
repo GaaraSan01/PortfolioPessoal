@@ -57,7 +57,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
 }
 
 html {
@@ -118,7 +117,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.8s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .loader-content {
@@ -164,8 +163,14 @@ body.loaded .preloader {
 }
 
 
-/* --- CURSOR --- */
-@media (min-width: 968px) {
+/* --- CURSOR (decorativo; o cursor nativo continua visível) --- */
+@media (min-width: 968px) and (hover: hover) and (pointer: fine) {
+    .cursor-dot,
+    .cursor-outline {
+        left: -100px;
+        top: -100px;
+    }
+
     .cursor-dot {
         position: fixed;
         width: 6px;
@@ -635,10 +640,6 @@ body.loaded .preloader {
     .cursor-dot,
     .cursor-outline {
         display: none;
-    }
-
-    * {
-        cursor: auto;
     }
 
     .about-grid,
