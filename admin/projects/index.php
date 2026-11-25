@@ -42,7 +42,7 @@ include dirname(__DIR__) . '/partials/header.php';
                 <td><span class="badge <?= ($p['status'] ?? 'draft') === 'published' ? 'badge-green' : 'badge-gray' ?>"><?= htmlspecialchars($p['status'] ?? 'draft') ?></span></td>
                 <td class="actions-cell">
                     <a href="<?= admin_url('projects/edit.php?id=' . urlencode($p['id'])) ?>" class="btn-sm">Editar</a>
-                    <form method="POST" action="<?= admin_url('projects/delete.php') ?>" onsubmit="return confirm('Excluir este projeto?')">
+                    <form method="POST" action="<?= admin_url('projects/delete.php') ?>" data-confirm="Excluir este projeto?">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($p['id']) ?>">
                         <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                         <button type="submit" class="btn-sm danger">Excluir</button>

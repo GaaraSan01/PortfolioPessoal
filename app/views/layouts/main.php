@@ -46,14 +46,8 @@
 
     <title><?= $e($seo['title']) ?></title>
     
-    <!-- Tema antes do CSS para evitar flash: escolha salva > preferência do sistema -->
-    <script>
-        (function () {
-            var t; try { t = localStorage.getItem('theme'); } catch (e) {}
-            if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-            document.documentElement.dataset.theme = t;
-        })();
-    </script>
+    <!-- Tema antes do CSS para evitar flash (arquivo externo por causa da CSP) -->
+    <script src="<?= asset('js/theme.js') ?>"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

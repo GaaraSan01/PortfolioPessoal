@@ -9,6 +9,6 @@
 <?php if (!empty($extra_js)): ?>
     <?= $extra_js ?>
 <?php endif; ?>
-<script src="<?= BASE_URL ?>/admin/assets/js/admin.js"></script>
+<script src="<?= BASE_URL ?>/admin/assets/js/admin.js?v=<?= filemtime(ADMIN_PATH . '/assets/js/admin.js') ?>"></script>
 </body>
 </html>
