@@ -1,4 +1,4 @@
-<article class="blog-post-article">
+<article class="blog-post-article" id="top">
     <!-- Hero do Post -->
     <section class="page-hero blog-post-hero">
         <div class="container">
@@ -22,10 +22,30 @@
 
     <!-- Conteúdo do Post -->
     <section class="blog-post-content">
-        <div class="container">
+        <div class="container post-layout">
             <div class="post-body reveal">
                 <?= $post['content_html'] ?>
             </div>
+
+            <?php if (count($post['toc']) >= 2): ?>
+            <aside class="post-toc">
+                <p class="post-toc-title">Nesta página</p>
+                <nav aria-label="Nesta página">
+                    <ul>
+                        <?php foreach ($post['toc'] as $item): ?>
+                        <li class="toc-h<?= $item['level'] ?>"><a href="#<?= $item['id'] ?>"><?= htmlspecialchars($item['text']) ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </nav>
+                <a href="#top" class="post-toc-top">
+                    Voltar ao topo
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16 14-4-4-4 4"/></svg>
+                </a>
+            </aside>
+            <?php endif; ?>
+        </div>
+
+        <div class="container">
 
             <!-- Rodapé do Post -->
             <div class="post-footer reveal">
@@ -65,4 +85,30 @@ document.querySelectorAll('.post-body table').forEach(function(table) {
         wrapper.appendChild(table);
     }
 });
+
+// Destaca no índice lateral a seção que está no topo da tela
+(function() {
+    var links = document.querySelectorAll('.post-toc nav a');
+    if (!links.length) return;
+    var byId = {};
+    links.forEach(function(a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var headings = Array.prototype.filter.call(document.querySelectorAll('.post-body h2[id], .post-body h3[id]'), function(h) { return byId[h.id]; });
+    function setActive(id) {
+        links.forEach(function(a) { a.removeAttribute('aria-current'); });
+        if (byId[id]) byId[id].setAttribute('aria-current', 'true');
+    }
+    var ticking = false;
+    function update() {
+        ticking = false;
+        // Último título que já passou da faixa superior da tela; no fim da página, o último
+        var current = headings[0];
+        headings.forEach(function(h) { if (h.getBoundingClientRect().top < 140) current = h; });
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = headings[headings.length - 1];
+        setActive(current.id);
+    }
+    window.addEventListener('scroll', function() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+})();
 </script>

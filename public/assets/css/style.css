@@ -2348,6 +2348,80 @@ body.loaded .preloader {
     color: rgba(var(--fg-rgb), 0.85);
 }
 
+/* Índice lateral "Nesta página" (só em telas largas) */
+.post-body h2,
+.post-body h3 {
+    scroll-margin-top: 110px;
+}
+
+.post-toc {
+    display: none;
+}
+
+@media (min-width: 1280px) {
+    .post-layout {
+        display: grid;
+        grid-template-columns: 1fr 720px 1fr;
+        column-gap: 3rem;
+        align-items: start;
+    }
+
+    .post-layout .post-body {
+        grid-column: 2;
+        margin: 0;
+    }
+
+    .post-toc {
+        display: block;
+        grid-column: 3;
+        position: sticky;
+        top: 120px;
+        max-width: 260px;
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+        font-size: 0.85rem;
+        line-height: 1.45;
+    }
+}
+
+.post-toc-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.post-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.post-toc li {
+    margin-bottom: 0.75rem;
+}
+
+.post-toc li.toc-h3 {
+    padding-left: 1rem;
+}
+
+.post-toc a {
+    color: rgba(var(--fg-rgb), 0.55);
+    transition: color 0.2s;
+}
+
+.post-toc a:hover,
+.post-toc a[aria-current="true"] {
+    color: var(--text-primary);
+}
+
+.post-toc-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+}
+
 .post-body h2 {
     font-family: var(--font-heading);
     font-size: 2rem;
