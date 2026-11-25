@@ -6,6 +6,7 @@ class HomeController extends Controller
     {
         $data = [
             'title' => 'Home',
+            'seoKey' => 'page.home',
             'metaDescription' => 'Portfolio de Vinicius Henrique - Desenvolvimento Web',
             'projects' => $this->getProjects()
         ];

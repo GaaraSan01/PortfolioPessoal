@@ -7,6 +7,7 @@
     RewriteCond %{REQUEST_URI} !^/admin/logout\.php
     RewriteCond %{REQUEST_URI} !^/admin/projects/
     RewriteCond %{REQUEST_URI} !^/admin/posts/
+    RewriteCond %{REQUEST_URI} !^/admin/seo/
     RewriteRule \.php$ - [F,L]
 </IfModule>
 

@@ -9,5 +9,6 @@
 <?php if (!empty($extra_js)): ?>
     <?= $extra_js ?>
 <?php endif; ?>
+<script src="<?= BASE_URL ?>/admin/assets/js/admin.js"></script>
 </body>
 </html>

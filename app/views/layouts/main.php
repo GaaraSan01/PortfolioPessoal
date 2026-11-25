@@ -10,25 +10,41 @@
     <link rel="apple-touch-icon" sizes="180x180" href="<?= uploads('favicon/apple-touch-icon.png') ?>">
     <link rel="manifest" href="<?= uploads('favicon/site.webmanifest') ?>">
 
-    <meta name="description" content="<?= $metaDescription ?? 'Portfólio Vinicius Henrique - Desenvolvedor Full Stack especializado em UI/UX e performance.' ?>">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="<?= (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>">
-    
+<?php
+    // Metas configuráveis em /admin/seo ($data vem de View::render)
+    $seo = Seo::meta($data);
+    $e = fn($s) => htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    ?>
+    <meta name="description" content="<?= $e($seo['description']) ?>">
+    <meta name="robots" content="<?= $seo['robots'] ?>">
+    <link rel="canonical" href="<?= $e($seo['canonical']) ?>">
+    <?php if ($code = Seo::get('site.google_verification')): ?>
+    <meta name="google-site-verification" content="<?= $e($code) ?>">
+    <?php endif; ?>
+    <?php if ($code = Seo::get('site.bing_verification')): ?>
+    <meta name="msvalidate.01" content="<?= $e($code) ?>">
+    <?php endif; ?>
+
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<?= (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>">
-    <meta property="og:title" content="<?= ($title ?? 'Home') . ' | ' . APP_NAME ?>">
-    <meta property="og:description" content="<?= $metaDescription ?? 'Portfólio Vinicius Henrique - Desenvolvedor Full Stack' ?>">
-    <meta property="og:image" content="<?= uploads('og-image.jpg') ?>">
+    <meta property="og:type" content="<?= $e($seo['type']) ?>">
+    <meta property="og:site_name" content="<?= $e(Seo::get('site.name', APP_NAME)) ?>">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="<?= $e($seo['canonical']) ?>">
+    <meta property="og:title" content="<?= $e($seo['title']) ?>">
+    <meta property="og:description" content="<?= $e($seo['description']) ?>">
+    <?php if ($seo['image']): ?>
+    <meta property="og:image" content="<?= $e($seo['image']) ?>">
+    <?php endif; ?>
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="<?= (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>">
-    <meta property="twitter:title" content="<?= ($title ?? 'Home') . ' | ' . APP_NAME ?>">
-    <meta property="twitter:description" content="<?= $metaDescription ?? 'Portfólio Vinicius Henrique - Desenvolvedor Full Stack' ?>">
-    <meta property="twitter:image" content="<?= uploads('og-image.jpg') ?>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= $e($seo['title']) ?>">
+    <meta name="twitter:description" content="<?= $e($seo['description']) ?>">
+    <?php if ($seo['image']): ?>
+    <meta name="twitter:image" content="<?= $e($seo['image']) ?>">
+    <?php endif; ?>
 
-    <title><?= ($title ?? 'Home') . ' | ' . APP_NAME ?></title>
+    <title><?= $e($seo['title']) ?></title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,20 +55,7 @@
     <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
 
     <!-- Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Vinicius Henrique",
-      "url": "https://viniciush.vnicidigital.com.br/",
-      "jobTitle": "Desenvolvedor Full Stack",
-      "description": "Desenvolvedor Full Stack especializado em experiências digitais modernas e performáticas.",
-      "sameAs": [
-        "https://github.com/GaaraSan01",
-        "https://www.linkedin.com/in/viniciushms/"
-      ]
-    }
-    </script>
+    <script type="application/ld+json"><?= Seo::personJsonLd() ?></script>
 </head>
 <body>
     

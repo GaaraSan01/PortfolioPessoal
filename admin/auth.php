@@ -6,6 +6,7 @@ define('ROOT', dirname(__DIR__));
 // Carregar config global do site para usar constantes (BASE_URL, etc.)
 require_once ROOT . '/config/config.php';
 require_once ROOT . '/core/Database.php';
+require_once ROOT . '/core/Seo.php';
 
 // Credenciais agora são validadas através do banco de dados (tabela users)
 
@@ -62,6 +63,41 @@ function delete_upload(PDO $pdo, ?string $image): void {
     if ((int)$stmt->fetchColumn() > 0) return;
     $file = UPLOADS_PATH . '/' . basename($image);
     if (is_file($file)) unlink($file);
+}
+
+/** Move o upload do campo $field para UPLOADS_PATH; retorna o nome do arquivo ou null (sem arquivo / erro em $errors). */
+function upload_image(string $field, string $prefix, array &$errors): ?string {
+    $file = $_FILES[$field] ?? null;
+    if (!$file || $file['error'] === UPLOAD_ERR_NO_FILE) return null;
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $errors[] = 'Erro ao fazer upload da imagem.';
+        return null;
+    }
+    $filename = uniqid($prefix) . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', basename($file['name']));
+    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif'], true) || strpos($mime, 'image/') !== 0) {
+        $errors[] = 'Apenas arquivos de imagem são permitidos (JPG, PNG, GIF, WEBP, AVIF).';
+        return null;
+    }
+    if (!is_dir(UPLOADS_PATH)) mkdir(UPLOADS_PATH, 0755, true);
+    if (!move_uploaded_file($file['tmp_name'], UPLOADS_PATH . '/' . $filename)) {
+        $errors[] = 'Erro ao fazer upload da imagem.';
+        return null;
+    }
+    return $filename;
+}
+
+/** Lê os campos de SEO de um post/projeto do formulário. */
+function seo_fields_from_post(string $prefix): array {
+    return [
+        "$prefix.title"       => trim($_POST['seo_title'] ?? ''),
+        "$prefix.description" => trim($_POST['seo_description'] ?? ''),
+        "$prefix.noindex"     => !empty($_POST['seo_noindex']) ? '1' : '',
+    ];
 }
 
 function format_post_date(string $iso): ?string {

@@ -13,6 +13,7 @@ class ContactController extends Controller
     {
         $data = [
             'title' => 'Contato',
+            'seoKey' => 'page.contact',
             'metaDescription' => 'Entre em contato com Vinicius Henrique para novos projetos ou parcerias.'
         ];
 

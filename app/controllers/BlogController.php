@@ -44,6 +44,8 @@ class BlogController extends Controller
 
         $data = [
             'title'           => $searchQuery ? "Pesquisa: {$searchQuery} | Blog" : 'Blog',
+            'seoKey'          => $searchQuery ? null : 'page.blog',
+            'noindex'         => (bool)$searchQuery,
             'metaDescription' => 'Artigos e reflexões de Vinicius Henrique sobre tecnologia e design.',
             'posts'           => $postsPaginated,
             'currentPage'     => $page,
@@ -65,7 +67,7 @@ class BlogController extends Controller
 
         if (!$post) {
             http_response_code(404);
-            $this->view('404', ['title' => 'Post não encontrado']);
+            $this->view('404', ['title' => 'Post não encontrado', 'noindex' => true]);
             return;
         }
 
@@ -77,6 +79,9 @@ class BlogController extends Controller
 
         $data = [
             'title'           => $post['title'] . ' | Blog',
+            'seoKey'          => 'post.' . $post['id'],
+            'ogType'          => 'article',
+            'noindex'         => ($post['status'] ?? '') !== 'published',
             'metaDescription' => $post['excerpt'],
             'post'            => $post
         ];

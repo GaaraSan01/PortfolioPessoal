@@ -15,6 +15,7 @@ if ($id) {
         $stmt->execute([$id]);
         
         if ($stmt->rowCount() > 0) {
+            Seo::deletePrefix("post.$id.");
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Post excluído com sucesso.'];
         } else {
             $_SESSION['flash'] = ['type' => 'error', 'msg' => 'Post não encontrado.'];

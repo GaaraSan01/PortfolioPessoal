@@ -23,6 +23,7 @@ class ProjectsController extends Controller
 
         $data = [
             'title'           => 'Projetos',
+            'seoKey'          => 'page.projects',
             'metaDescription' => 'Confira os projetos selecionados desenvolvidos por Vinicius Henrique, focando em UI/UX e performance.',
             'projects'        => $projectsPaginated,
             'currentPage'     => $page,
@@ -42,7 +43,7 @@ class ProjectsController extends Controller
 
         if (!$project) {
             http_response_code(404);
-            $this->view('404', ['title' => 'Projeto não encontrado']);
+            $this->view('404', ['title' => 'Projeto não encontrado', 'noindex' => true]);
             return;
         }
 
@@ -51,6 +52,9 @@ class ProjectsController extends Controller
 
         $data = [
             'title'           => $project['title'] . ' | Projetos',
+            'seoKey'          => 'project.' . $project['id'],
+            'ogImage'         => $project['image'] ?? '',
+            'noindex'         => ($project['status'] ?? '') !== 'published',
             'metaDescription' => $project['description'],
             'project'         => $project
         ];

@@ -20,6 +20,7 @@ if ($id) {
 
         if ($stmt->rowCount() > 0) {
             delete_upload($pdo, $image ?: null);
+            Seo::deletePrefix("project.$id.");
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Projeto excluído com sucesso.'];
         } else {
             $_SESSION['flash'] = ['type' => 'error', 'msg' => 'Projeto não encontrado.'];

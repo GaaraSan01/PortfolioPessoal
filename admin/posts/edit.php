@@ -68,7 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $status,
                     date('Y-m-d H:i:s')
                 ]);
+                $id = $pdo->lastInsertId();
             }
+            Seo::save(seo_fields_from_post("post.$id"));
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Post salvo com sucesso.'];
             header('Location: ' . admin_url('posts/index.php'));
             exit;
@@ -163,6 +165,14 @@ console.log('Exemplo de código');
                 <small>Suporte completo a Markdown: títulos, negrito, listas, links, código e blockquotes.</small>
             </div>
 
+            <?php
+            $seoKey = $isEdit ? "post.$id" : null;
+            $seoUrl = rtrim(BASE_URL, '/') . '/blog/post/' . ($post['slug'] ?? '…');
+            $seoTitleSuffix = ' | Blog';
+            $seoDescFallback = 'excerpt';
+            include dirname(__DIR__) . '/partials/seo-fields.php';
+            ?>
+
             <div class="form-actions">
                 <button type="submit" class="btn-primary"><?= $isEdit ? 'Salvar Alterações' : 'Publicar Post' ?></button>
                 <a href="<?= admin_url('posts/index.php') ?>" class="btn-secondary">Cancelar</a>
@@ -173,7 +183,6 @@ $extra_js = '
 <!-- marked.js para preview Markdown -->
 <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
-<script src="' . BASE_URL . '/admin/assets/js/admin.js"></script>
 ';
 include dirname(__DIR__) . '/partials/footer.php'; 
 ?>

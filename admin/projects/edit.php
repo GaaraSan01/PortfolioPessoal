@@ -48,31 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!valid_project_url($url))
         $errors[] = 'URL inválida: use um endereço http:// ou https://.';
 
-    if (empty($errors) && isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = ROOT . '/public/uploads/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
-        $filename = uniqid('proj_') . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', basename($_FILES['image_file']['name']));
-        $targetFile = $uploadDir . $filename;
-
-        // Validação de arquivo (Somente imagens)
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif'];
-        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $_FILES['image_file']['tmp_name']);
-        finfo_close($finfo);
-
-        if (!in_array($ext, $allowedExtensions) || strpos($mime, 'image/') !== 0) {
-            $errors[] = 'Apenas arquivos de imagem são permitidos (JPG, PNG, GIF, WEBP, AVIF).';
-        } else {
-            if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetFile)) {
-                $image = $filename;
-                $uploaded = true;
-            } else {
-                $errors[] = 'Erro ao fazer upload da imagem.';
-            }
-        }
+    if (empty($errors) && ($file = upload_image('image_file', 'proj_', $errors))) {
+        $image = $file;
+        $uploaded = true;
     }
 
     if (empty($errors)) {
@@ -113,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $status,
                     date('Y-m-d H:i:s')
                 ]);
+                $id = $pdo->lastInsertId();
             }
+            Seo::save(seo_fields_from_post("project.$id"));
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Projeto salvo com sucesso.'];
             header('Location: ' . admin_url('projects/index.php'));
             exit;
@@ -200,6 +180,14 @@ include dirname(__DIR__) . '/partials/header.php';
         <input type="text" name="technologies" placeholder="React, PHP, PostgreSQL"
             value="<?= htmlspecialchars(implode(', ', $project['technologies'] ?? [])) ?>">
     </div>
+
+    <?php
+    $seoKey = $isEdit ? "project.$id" : null;
+    $seoUrl = rtrim(BASE_URL, '/') . '/projects/show/' . ($project['slug'] ?? '…');
+    $seoTitleSuffix = ' | Projetos';
+    $seoDescFallback = 'description';
+    include dirname(__DIR__) . '/partials/seo-fields.php';
+    ?>
 
     <div class="form-actions">
         <button type="submit" class="btn-primary"><?= $isEdit ? 'Salvar Alterações' : 'Criar Projeto' ?></button>

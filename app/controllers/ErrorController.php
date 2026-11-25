@@ -8,6 +8,7 @@ class ErrorController extends Controller
         
         $data = [
             'title' => 'Página não encontrada',
+            'noindex' => true,
             'metaDescription' => 'Desculpe, a página que você está procurando não existe ou foi movida.'
         ];
 
