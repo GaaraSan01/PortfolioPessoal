@@ -821,6 +821,11 @@ body.loaded .preloader {
 .container.bottom-flex {
     display: flex;
     justify-content: space-between;
+
+    p {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+    }
 }
 
 .social-links {

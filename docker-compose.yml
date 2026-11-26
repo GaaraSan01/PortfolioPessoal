@@ -5,7 +5,7 @@ services:
     build: .
     container_name: vinicius-portfolio
     ports:
-      - "8080:80"
+      - "8000:80"
     volumes:
       # Mapeia a pasta atual para dentro do container
       # Isso permite que você edite arquivos localmente e veja as mudanças na hora
